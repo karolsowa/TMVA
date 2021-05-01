@@ -22,7 +22,7 @@
 #include <chrono>
 #include <fstream>
 		
-Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 15.5, int NTrees = 2000){
+Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 0.155, int NTrees = 2000){
 
 // **************** PART 1 - ANALYSE ********************* //
 	
