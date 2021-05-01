@@ -27,7 +27,7 @@ class Result{
 
 std::vector<Double_t> AdaBoostBeta = {0.01};
 std::vector<Int_t> MaxDepth = {2};
-std::vector<Double_t> MinNodeSize = {0.05};
+std::vector<Double_t> MinNodeSize = {5.0};
 std::vector<Int_t> NTrees = {450};
 std::vector<Result> Results;
 

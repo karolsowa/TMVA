@@ -22,7 +22,7 @@
 #include <chrono>
 #include <fstream>
 		
-Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 0.155, int NTrees = 2000){
+Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 15.5, int NTrees = 2000){
 
 // **************** PART 1 - ANALYSE ********************* //
 	
@@ -50,17 +50,24 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//std::cout << std::endl << "==> Start TMVAClassification" << std::endl;
 	std::vector<TString> variables = {
 		"B_ENDVERTEX_CHI2",
-		"B_OWNPV_CHI2",
-		"B_IPCHI2_OWNPV",
-		"B_DIRA_OWNPV",
-		"B_PT",
-		"B_FDCHI2_OWNPV",
-		"D0_IPCHI2_OWNPV",
-		"D0_IP_OWNPV",
-		"D0_DIRA_ORIVX",
-		"D0_ENDVERTEX_CHI2",
-		"D0_FDCHI2_OWNPV",
-		"D0_DIRA_OWNPV",
+        "B_OWNPV_CHI2",
+        "B_IPCHI2_OWNPV",
+        "B_DIRA_OWNPV",
+        "B_PT",
+        "B_FDCHI2_OWNPV",
+        "D0_IPCHI2_OWNPV",
+        "D0_IP_OWNPV",
+        "D0_DIRA_ORIVX",
+        "D0_ENDVERTEX_CHI2",
+        "D0_FDCHI2_OWNPV",
+        "D0_DIRA_OWNPV",
+        "D0_FD_OWNPV",
+        "D0_FD_ORIVX",
+        "D0_FDCHI2_ORIVX",
+        "D0_OWNPV_CHI2",
+        "maxD_GhostProb",
+        "minIPchi2_D_childs",
+        "D0_Dist_z",
 //		"deltaR_Ks0Pi", 				//później
 //		"KS0_CosTheta",
 //		"K_Plus_D_PIDK",
@@ -115,10 +122,11 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	TChain * background  = new TChain("background");
 	TChain * inputTree  = new TChain("inputTree");
 
-	signal->Add("/home/sowrol/repo/Dane/B2DK0Pi_2012MC_sig.root/DecayTree"); 
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
 	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
-	background->Add("/home/sowrol/repo/Dane/B2DX_2016_job_2_sidebands.root/DecayTree");		//Przetestować dla obydwu
-	inputTree->Add("/home/sowrol/repo/Dane/B2DX_2016_job_2.root/Bd2DK0PiTree/DecayTree"); 
+	background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
+	inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
 	//inputTree->Add("/home/student/Project/B2DK0Pi/B2DK0Pi_2012MC_sig.root/DecayTree"); 
 
 	std::cout<<"signal, bkg and input added"<<"\n";

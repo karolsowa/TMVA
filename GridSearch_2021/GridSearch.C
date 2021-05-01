@@ -1,6 +1,6 @@
 #include "GridSearch.h"
 #include "Cascade1.C"
-void GridSearch(Double_t AdaBoostBetaValue = 0.01, Int_t MaxDepthStep = 1, Double_t MinNodeSizeStep = 0.02, Int_t NTreesStep = 50){
+void GridSearch(Double_t AdaBoostBetaValue = 0.01, Int_t MaxDepthStep = 1, Double_t MinNodeSizeStep = 2.0, Int_t NTreesStep = 50){
 
 	// for(int i = 1; AdaBoostBeta.at(i-1) <= 0.6 - AdaBoostBetaStep; i++){			// Odkomentować przy zwykłym uruchamianiu
 	// 	Double_t s = AdaBoostBeta.at(0) + i*AdaBoostBetaStep;
@@ -16,7 +16,7 @@ void GridSearch(Double_t AdaBoostBetaValue = 0.01, Int_t MaxDepthStep = 1, Doubl
 	}
 
 
-	for(int i = 1; MinNodeSize.at(i-1) <= 0.2 - MinNodeSizeStep; i++){
+	for(int i = 1; MinNodeSize.at(i-1) <= 20.0 - MinNodeSizeStep; i++){
 		Double_t s = MinNodeSize.at(0) + i*MinNodeSizeStep;
 		MinNodeSize.push_back(s);
 	}
