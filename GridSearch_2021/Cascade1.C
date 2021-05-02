@@ -9,7 +9,7 @@
 #include "TSystem.h"
 #include "TROOT.h"
 #include "TMVA/MethodCategory.h"
-#include "ROOT/TIOFeatures.hxx"
+//#include "ROOT/TIOFeatures.hxx"
 #include "TMVA/Factory.h"
 #include "TMVA/Tools.h"
 #include "TMVA/TMVAGui.h"
