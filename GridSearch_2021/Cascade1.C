@@ -80,7 +80,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	};
 	std::cout<<"Created a vector of variables"<<"\n";
 	std::vector<TString> spectators = {};
-e
+
 	//std::cout<<"Main node name: "<<eng->GetNodeName(mainnode)<<"\n";
 	TFile* outputFile = TFile::Open(outfileName, "RECREATE");
 	//std::cout<<"Opened the output file"<<"\n";
