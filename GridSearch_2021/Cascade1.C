@@ -135,7 +135,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//TFile *output  = new TFile("/home/sowrol/repo/Results_cascade1_job2.root", "RECREATE");
 
 	// file for post_BDT ana:
-	//TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2.root"; 							//?????
+	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root"; 							//?????
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
