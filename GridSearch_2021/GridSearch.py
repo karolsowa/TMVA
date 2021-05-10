@@ -37,12 +37,12 @@ def runMacro(macroName, arglist=None, splash=False, interprete=False, batch=True
 
 def main():
     AdaBoostStep = 0.05
-    AdaBoostList = [0.01]
+    AdaBoostList = [0.11, 0.36, 0.46]
     i = 0
-    while AdaBoostList[i] < 0.6 - AdaBoostStep:
-        a = AdaBoostList[i] + AdaBoostStep
-        AdaBoostList.append(round(a,2))
-        i += 1
+    #while AdaBoostList[i] < 0.6 - AdaBoostStep:
+     #   a = AdaBoostList[i] + AdaBoostStep
+      #  AdaBoostList.append(round(a,2))
+       # i += 1
     for Ada  in AdaBoostList:
         a = runMacro("/home/sowrol/repo/GridSearch_2021/GridSearch.C", arglist = [Ada])
 

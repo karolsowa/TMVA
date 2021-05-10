@@ -58,7 +58,7 @@ void GridSearch(Double_t AdaBoostBetaValue = 0.01, Int_t MaxDepthStep = 1, Doubl
 	std::ofstream outfile;
 
 	for(int i = 0; i < AdaBoostBeta.size(); ++i){
-		for(int j = 0; j < MaxDepth.size(); ++j){
+		for(int j = 3; j < MaxDepth.size(); ++j){
 			for(int k = 0; k < MinNodeSize.size(); ++k){
 				for(int l = 0; l < NTrees.size(); ++l){
 	// int i = 0;
