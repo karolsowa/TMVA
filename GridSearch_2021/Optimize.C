@@ -24,17 +24,24 @@ void Optimize(){
 	std::cout << std::endl << "==>TMVAClassification: FIRST CLASSIFIER" << std::endl;
 	std::vector<TString> variables = {
 		"B_ENDVERTEX_CHI2",
-		"B_OWNPV_CHI2",
-		"B_IPCHI2_OWNPV",
-		"B_DIRA_OWNPV",
-		"B_PT",
-		"B_FDCHI2_OWNPV",
-		"D0_IPCHI2_OWNPV",
-		"D0_IP_OWNPV",
-		"D0_DIRA_ORIVX",
-		"D0_ENDVERTEX_CHI2",
-		"D0_FDCHI2_OWNPV",
-		"D0_DIRA_OWNPV",
+        "B_OWNPV_CHI2",
+        "B_IPCHI2_OWNPV",
+        "B_DIRA_OWNPV",
+        "B_PT",
+        "B_FDCHI2_OWNPV",
+        "D0_IPCHI2_OWNPV",
+        "D0_IP_OWNPV",
+        "D0_DIRA_ORIVX",
+        "D0_ENDVERTEX_CHI2",
+        "D0_FDCHI2_OWNPV",
+        "D0_DIRA_OWNPV",
+        "D0_FD_OWNPV",
+        "D0_FD_ORIVX",
+        "D0_FDCHI2_ORIVX",
+        "D0_OWNPV_CHI2",
+        "maxD_GhostProb",
+        "minIPchi2_D_childs",
+        "D0_Dist_z",
 //		"deltaR_Ks0Pi", 				//później
 //		"KS0_CosTheta",
 //		"K_Plus_D_PIDK",
@@ -46,10 +53,10 @@ void Optimize(){
 
 	};
 	std::vector<TString> spectators = {};
-	TString outfileName = "/home/student/Project/B2DK0Pi/ANALIZA/TMVA_cascade1.root";
+	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_HPO.root";
 	TFile* outputFile = TFile::Open(outfileName, "RECREATE");
 
-	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:!Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
+	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
 	TMVA::DataLoader *dataloader = new TMVA::DataLoader("dataset");
 
 	for (const TString& variable : variables) {
@@ -66,13 +73,15 @@ void Optimize(){
 	TChain * background  = new TChain("background");
 	TChain * inputTree  = new TChain("inputTree");
 
-	signal->Add("/home/student/Project/B2DK0Pi/B2DK0Pi_2012MC_sig.root/DecayTree"); 
-	background->Add("/home/student/Project/B2DK0Pi/B2DX_2016_job_2_sidebands.root/DecayTree");		
-	inputTree->Add("/home/student/Project/B2DK0Pi/B2DX_2016_job_2.root/Bd2DK0PiTree/DecayTree"); 
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
+	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
+	background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
+	inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
 
 
 	// file for post_BDT ana:
-	TString myfile =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1.root"; 							
+	//TString myfile =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1.root"; 							
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
