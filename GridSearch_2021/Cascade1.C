@@ -240,7 +240,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 	Double_t BDT_response; 
 
-	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_GS";
+	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_GS/";
 	TString prefix2 = "TMVAClassification";
 	TString methodName2 = "BDTG method";
 	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
