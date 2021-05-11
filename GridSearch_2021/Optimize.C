@@ -98,10 +98,10 @@ void Optimize(){
 	HPO->SetNumFolds(4);
 
 	std::cout << "Info: calling TMVA::HyperParameterOptimisation::Evaluate" << std::endl;
-     HPO->Evaluate();
-     TMVA::HyperParameterOptimisationResult HPOResult = HPO->GetResults();
-     HPOResult.Print();
-
+    HPO->Evaluate();
+    TMVA::HyperParameterOptimisationResult HPOResult = HPO->GetResults();
+    HPOResult.Print();
+    std::cout<<"All done"<<"\n";
 	//dataloader->PrepareTrainingAndTestTree(cut1, cut2, "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V");			
 //   TString methodOptions = "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=2000:MinNodeSize=2.5%:MaxDepth=5:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100";
 //   auto method = factory->BookMethod(dataloader, TMVA::Types::kBDT,"BDTG", methodOptions);
