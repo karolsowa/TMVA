@@ -56,7 +56,7 @@ void Optimize(){
 	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_HPO.root";
 	TFile* outputFile = TFile::Open(outfileName, "RECREATE");
 
-	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
+	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:!Silent:!Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
 	TMVA::DataLoader *dataloader = new TMVA::DataLoader("dataset");
 
 	for (const TString& variable : variables) {
