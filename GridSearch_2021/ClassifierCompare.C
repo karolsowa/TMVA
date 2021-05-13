@@ -14,7 +14,7 @@ void ClassifierCompare(){
 	TString GS_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root";
 	TString OTP_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_OTP.root";
-	TFile *GS_File = File::Open(GS_filename);
+	TFile *GS_File = TFile::Open(GS_filename);
 	TFile *HPO_File = TFile::Open(HPO_filename);
 	TFile *OTP_File = TFile::Open(OTP_filename);
 	TTreeReader *GS_fReader = new TTreeReader("DecayTree", GS_File);  //!the tree reader
