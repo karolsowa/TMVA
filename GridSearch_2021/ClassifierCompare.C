@@ -84,7 +84,7 @@ void ClassifierCompare(bool mode = 1){
 
     TCanvas* B_can = new TCanvas("B_can", "B_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
-    gPad->SetLeftMargin(0.15);
+    gPad->SetLeftMargin(0.2);
     gStyle->SetOptStat(0);
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
@@ -112,7 +112,7 @@ void ClassifierCompare(bool mode = 1){
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
-    gPad->SetLeftMargin(0.15);
+    gPad->SetLeftMargin(0.2);
     gStyle->SetOptStat(0);
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
