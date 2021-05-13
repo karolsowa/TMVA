@@ -91,7 +91,7 @@ void ClassifierCompare(bool mode = 1){
     B_OTP->SetLineColor(kGreen);
 
     if (mode)
-        B_GS->GetYaxis()->SetRangeUser(0,50000);
+        B_HPO->GetYaxis()->SetRangeUser(0,50000);
     auto B_legend = new TLegend(0.8,0.7,0.95,0.9);
 
     B_HPO->Draw();
@@ -116,7 +116,7 @@ void ClassifierCompare(bool mode = 1){
     D_OTP->SetLineColor(kGreen);
     auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
     if (mode)
-        D_GS->GetYaxis()->SetRangeUser(0,50000);
+        D_HPO->GetYaxis()->SetRangeUser(0,50000);
     D_HPO->Draw();
     D_GS->Draw("SameHist");
     if (mode)
