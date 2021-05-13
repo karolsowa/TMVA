@@ -88,7 +88,7 @@ void ClassifierCompare(){
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
-    B_GS->GetYaxis()->SetRangeUser(0,40000);
+    B_GS->GetYaxis()->SetRangeUser(0,60000);
     B_GS->Draw();
     B_HPO->Draw("SameHist");
     B_OTP->Draw("SameHist");
