@@ -88,9 +88,11 @@ void ClassifierCompare(){
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
+    B_GS->GetYaxis()->SetRangeUser(0,20000);
     B_GS->Draw();
     B_HPO->Draw("SameHist");
     B_OTP->Draw("SameHist");
+
     
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
@@ -99,6 +101,7 @@ void ClassifierCompare(){
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
+    D_GS->GetYaxis()->SetRangeUser(0,40000);
     D_GS->Draw();
     D_HPO->Draw("SameHist");
     D_OTP->Draw("SameHist");
