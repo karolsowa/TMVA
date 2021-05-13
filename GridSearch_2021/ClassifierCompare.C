@@ -9,7 +9,7 @@
 
 
 
-void ClassifierCompare(){
+void ClassifierCompare(bool mode = 1){
 	gROOT->Reset();
 	TString GS_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root";
@@ -88,11 +88,21 @@ void ClassifierCompare(){
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
-    B_GS->GetYaxis()->SetRangeUser(0,60000);
+    if (mode)
+        B_GS->GetYaxis()->SetRangeUser(0,50000);
+    auto B_legend = new TLegend(0.8,0.7,0.95,0.9);
+
     B_GS->Draw();
     B_HPO->Draw("SameHist");
-    B_OTP->Draw("SameHist");
+    if (mode)
+        B_OTP->Draw("SameHist");
 
+    B_legend->AddEntry(B_GS, "GridSearch ", "l");
+    B_legend->AddEntry(B_HPO, "HPO ", "l");
+    if (mode)
+        B_legend->AddEntry(B_OTP, "OTP ", "l");
+    B_legend->Draw();
+    
     
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
@@ -101,10 +111,19 @@ void ClassifierCompare(){
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
-    D_GS->GetYaxis()->SetRangeUser(0,50000);
+    auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
+    if (mode)
+        D_GS->GetYaxis()->SetRangeUser(0,50000);
     D_GS->Draw();
     D_HPO->Draw("SameHist");
-    D_OTP->Draw("SameHist");
+    if (mode)
+        D_OTP->Draw("SameHist");
+
+    D_legend->AddEntry(D_GS, "GridSearch ", "l");
+    D_legend->AddEntry(D_HPO, "HPO ", "l");
+    if (mode)
+        D_legend->AddEntry(D_OTP, "OTP ", "l");
+    D_legend->Draw();
     
     //myFile->Close();
     //delete fReader;
