@@ -92,6 +92,7 @@ void ClassifierCompare(bool mode = 1){
     B_HPO->SetXTitle("Mass [MeV/c^2]");
     B_HPO->SetYTitle("Events");
     B_HPO->SetTitle("B mass");
+    B_HPO->GetYaxis()->SetTitleOffset(1.5);
 
     if (mode)
         B_HPO->GetYaxis()->SetRangeUser(0,50000);
@@ -120,6 +121,7 @@ void ClassifierCompare(bool mode = 1){
     D_HPO->SetXTitle("Mass [MeV/c^2]");
     D_HPO->SetYTitle("Events");
     D_HPO->SetTitle("D0 mass");
+    D_HPO->GetYaxis()->SetTitleOffset(1.5);
     auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
     if (mode)
         D_HPO->GetYaxis()->SetRangeUser(0,50000);
