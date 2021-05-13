@@ -85,15 +85,17 @@ void ClassifierCompare(bool mode = 1){
     TCanvas* B_can = new TCanvas("B_can", "B_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
+    gStyle->SetOptStat(0);
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
+
     if (mode)
         B_GS->GetYaxis()->SetRangeUser(0,50000);
     auto B_legend = new TLegend(0.8,0.7,0.95,0.9);
 
-    B_GS->Draw();
-    B_HPO->Draw("SameHist");
+    B_HPO->Draw();
+    B_GS->Draw("SameHist");
     if (mode)
         B_OTP->Draw("SameHist");
 
@@ -108,14 +110,15 @@ void ClassifierCompare(bool mode = 1){
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
+    gStyle->SetOptStat(0);
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
     auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
     if (mode)
         D_GS->GetYaxis()->SetRangeUser(0,50000);
-    D_GS->Draw();
-    D_HPO->Draw("SameHist");
+    D_HPO->Draw();
+    D_GS->Draw("SameHist");
     if (mode)
         D_OTP->Draw("SameHist");
 
