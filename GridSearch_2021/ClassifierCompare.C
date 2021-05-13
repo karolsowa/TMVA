@@ -45,8 +45,8 @@ void ClassifierCompare(){
 
     Double_t min_Bmass = 4600;
    	Double_t max_Bmass = 6100; //5.6
-    Double_t min_D0mass = 1750; // 1.820;  
-    Double_t max_D0mass =1950; // 2.02;
+    Double_t min_D0mass = 1800; // 1.820;  
+    Double_t max_D0mass =2000; // 2.02;
 
     Int_t B_NBINS = 80;
     Int_t D_NBINS = 100;
@@ -85,6 +85,9 @@ void ClassifierCompare(){
     TCanvas* B_can = new TCanvas("B_can", "B_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
+    B_GS->SetLineColor(kBlue);
+    B_HPO->SetLineColor(kRed);
+    B_OTP->SetLineColor(kGreen);
     B_GS->Draw();
     B_HPO->Draw("SameHist");
     B_OTP->Draw("SameHist");
@@ -93,6 +96,9 @@ void ClassifierCompare(){
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
+    D_GS->SetLineColor(kBlue);
+    D_HPO->SetLineColor(kRed);
+    D_OTP->SetLineColor(kGreen);
     D_GS->Draw();
     D_HPO->Draw("SameHist");
     D_OTP->Draw("SameHist");
