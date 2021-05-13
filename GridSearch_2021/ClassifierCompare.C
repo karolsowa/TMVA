@@ -9,24 +9,39 @@
 
 
 
-void ClassifierCompare(std::string filename){
+void ClassifierCompare(){
 	gROOT->Reset();
-	TFile *myFile = TFile::Open(filename.c_str());
-	TTreeReader *fReader = new TTreeReader("DecayTree", myFile);  //!the tree reader
+	TString GS_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root";
+	TString HPO_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root";
+	TString OTP_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_OTP.root";
+	TFile *GS_File = File::Open(GS_filename);
+	TFile *HPO_File = TFile::Open(HPO_filename);
+	TFile *OTP_File = TFile::Open(OTP_filename);
+	TTreeReader *GS_fReader = new TTreeReader("DecayTree", GS_File);  //!the tree reader
+	TTreeReader *HPO_fReader = new TTreeReader("DecayTree", HPO_File);  //!the tree reader
+	TTreeReader *OTP_fReader = new TTreeReader("DecayTree", OTP_File);  //!the tree reader
     //TTreeReaderValue<Double_t> B_M(fReader, "B_M");
-    TTreeReaderValue<Double_t> B_M(*fReader, "B_M");
-    TTreeReaderValue<Double_t> D0_M(*fReader, "D0_M");
-    TTreeReaderValue<Double_t> BDT_response(*fReader, "BDT_response");
+    TTreeReaderValue<Double_t> GS_B_M(*GS_fReader, "B_M");
+    TTreeReaderValue<Double_t> GS_D0_M(*GS_fReader, "D0_M");
+    TTreeReaderValue<Double_t> GS_BDT_response(*GS_fReader, "BDT_response");
+    TTreeReaderValue<Double_t> HPO_B_M(*HPO_fReader, "B_M");
+    TTreeReaderValue<Double_t> HPO_D0_M(*HPO_fReader, "D0_M");
+    TTreeReaderValue<Double_t> HPO_BDT_response(*HPO_fReader, "BDT_response");
+    TTreeReaderValue<Double_t> OTP_B_M(*OTP_fReader, "B_M");
+    TTreeReaderValue<Double_t> OTP_D0_M(*OTP_fReader, "D0_M");
+    TTreeReaderValue<Double_t> OTP_BDT_response(*OTP_fReader, "BDT_response");
 
+    TH1D* B_GS;
     TH1D* B_HPO;
     TH1D* B_OTP;
-    TH1D* B_GS;
+    TH1D* D_GS;    
     TH1D* D_HPO;
     TH1D* D_OTP;
-    TH1D* D_GS;
-    const Double_t BDT_HPO = 0.074918;
+
+    const Double_t BDT_GS = 0.69869;
+    const Double_t BDT_HPO = 0.210812;
     const Double_t BDT_OTP = 0.0884549;
-    const Double_t BDT_GS = 0.33856;
+    
 
     Double_t min_Bmass = 4600;
    	Double_t max_Bmass = 6100; //5.6
@@ -36,26 +51,33 @@ void ClassifierCompare(std::string filename){
     Int_t B_NBINS = 80;
     Int_t D_NBINS = 100;
 
+    B_GS = new TH1D("B_GS","B_OTP" , B_NBINS, min_Bmass, max_Bmass ); 
     B_HPO = new TH1D("B_HPO","B_HPO" , B_NBINS, min_Bmass, max_Bmass );
     B_OTP = new TH1D("B_OTP","B_OTP" , B_NBINS, min_Bmass, max_Bmass );
-    B_GS = new TH1D("B_GS","B_OTP" , B_NBINS, min_Bmass, max_Bmass ); 
 
+    D_GS = new TH1D("Ds_GS" , "Ds_GS" ,D_NBINS, min_D0mass, max_D0mass);
     D_HPO = new TH1D("Ds_HPO" , "Ds_HPO" ,D_NBINS, min_D0mass, max_D0mass);
     D_OTP = new TH1D("Ds_OTP" , "Ds_OTP" ,D_NBINS, min_D0mass, max_D0mass);
-    D_GS = new TH1D("Ds_GS" , "Ds_GS" ,D_NBINS, min_D0mass, max_D0mass);
 
-    while (fReader->Next()){
-    	if(*BDT_response > BDT_HPO){
-        	B_HPO->Fill(*B_M);
-        	D_HPO->Fill(*D0_M);
+
+    while (GS_fReader->Next()){
+   		if(*GS_BDT_response > BDT_GS){
+        	B_GS->Fill(*GS_B_M);
+        	D_GS->Fill(*GS_D0_M);
    		}
-   		if(*BDT_response > BDT_OTP){
-        	B_OTP->Fill(*B_M);
-        	D_OTP->Fill(*D0_M);
+    }
+
+    while (HPO_fReader->Next()){
+    	if(*HPO_BDT_response > BDT_HPO){
+        	B_HPO->Fill(*HPO_B_M);
+        	D_HPO->Fill(*HPO_D0_M);
    		}
-   		if(*BDT_response > BDT_GS){
-        	B_GS->Fill(*B_M);
-        	D_GS->Fill(*D0_M);
+    }
+
+    while (OTP_fReader->Next()){
+    	if(*OTP_BDT_response > BDT_OTP){
+        	B_OTP->Fill(*OTP_B_M);
+        	D_OTP->Fill(*OTP_D0_M);
    		}
     }
 
@@ -63,9 +85,18 @@ void ClassifierCompare(std::string filename){
     TCanvas* B_can = new TCanvas("B_can", "B_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
+    B_GS->Draw();
     B_HPO->Draw();
     B_OTP->Draw();
-    B_GS->Draw();
+    
+
+    TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
+    gPad->SetRightMargin(0.05);
+    gPad->SetLeftMargin(0.15);
+    D_GS->Draw();
+    D_HPO->Draw();
+    D_OTP->Draw();
+    
     //myFile->Close();
     //delete fReader;
     //fReader = 0;
