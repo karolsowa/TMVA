@@ -45,8 +45,8 @@ void ClassifierCompare(){
 
     Double_t min_Bmass = 4600;
    	Double_t max_Bmass = 6100; //5.6
-    Double_t min_D0mass = 1800; // 1.820;  
-    Double_t max_D0mass =2000; // 2.02;
+    Double_t min_D0mass = 1810; // 1.820;  
+    Double_t max_D0mass =1950; // 2.02;
 
     Int_t B_NBINS = 80;
     Int_t D_NBINS = 100;
@@ -101,7 +101,7 @@ void ClassifierCompare(){
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
-    D_GS->GetYaxis()->SetRangeUser(0,80000);
+    D_GS->GetYaxis()->SetRangeUser(0,65000);
     D_GS->Draw();
     D_HPO->Draw("SameHist");
     D_OTP->Draw("SameHist");
