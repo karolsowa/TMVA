@@ -86,16 +86,16 @@ void ClassifierCompare(){
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
     B_GS->Draw();
-    B_HPO->Draw();
-    B_OTP->Draw();
+    B_HPO->Draw("SameHist");
+    B_OTP->Draw("SameHist");
     
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
     gPad->SetLeftMargin(0.15);
     D_GS->Draw();
-    D_HPO->Draw();
-    D_OTP->Draw();
+    D_HPO->Draw("SameHist");
+    D_OTP->Draw("SameHist");
     
     //myFile->Close();
     //delete fReader;
