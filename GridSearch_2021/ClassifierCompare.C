@@ -89,6 +89,9 @@ void ClassifierCompare(bool mode = 1){
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
+    B_HPO->SetXTitle("Mass [MeV/c^2]");
+    B_HPO->SetYTitle("Events");
+    B_HPO->SetTitle("B mass");
 
     if (mode)
         B_HPO->GetYaxis()->SetRangeUser(0,50000);
@@ -114,6 +117,9 @@ void ClassifierCompare(bool mode = 1){
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
+    D_HPO->SetXTitle("Mass [MeV/c^2]");
+    D_HPO->SetYTitle("Events");
+    D_HPO->SetTitle("D0 mass");
     auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
     if (mode)
         D_HPO->GetYaxis()->SetRangeUser(0,50000);
