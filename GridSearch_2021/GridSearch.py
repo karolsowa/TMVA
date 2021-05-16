@@ -37,7 +37,7 @@ def runMacro(macroName, arglist=None, splash=False, interprete=False, batch=True
 
 def main():
     AdaBoostStep = 0.05
-    #AdaBoostList = [0.11, 0.36, 0.46]
+    AdaBoostList = [0.06]
     i = 0
     while AdaBoostList[i] < 0.6 - AdaBoostStep:
        a = AdaBoostList[i] + AdaBoostStep
