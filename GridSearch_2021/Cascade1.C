@@ -82,7 +82,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
         "KS0_FDCHI2_ORIVX",
         "KS0_ORIVX_CHI2",
 //        "KS0_DIRA_ORIVX",
-        "KS0_FDCHI2_OWNPV",
+//        "KS0_FDCHI2_OWNPV",
         "KS0_OWNPV_CHI2",
         "Pi_Plus_KS0_IPCHI2_OWNPV",
         "Pi_Minus_KS0_IPCHI2_OWNPV"
