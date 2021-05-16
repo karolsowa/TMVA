@@ -52,7 +52,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	std::vector<TString> variables = {
 		"B_ENDVERTEX_CHI2",
         "B_OWNPV_CHI2",
-        "B_IPCHI2_OWNPV",r
+        "B_IPCHI2_OWNPV",
         "B_DIRA_OWNPV",
         "B_PT",
         "B_FDCHI2_OWNPV",
