@@ -32,9 +32,9 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_OTP";
+	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights";
 	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
-	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_OTP.root";
+	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2.root";
 	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";
 	gSystem->RedirectOutput(screen, "a");
 	//fXaxis.GetNbins();
@@ -69,6 +69,24 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
         "maxD_GhostProb",
         "minIPchi2_D_childs",
         "D0_Dist_z",
+        "maxK0_GhostProb",
+        "minIPchi2_K0_childs",
+        "deltaR_Ks0Pi",                 
+        "KS0_ENDVERTEX_CHI2",
+        "KS0_PT",
+        "KS0_IP_OWNPV",
+        "KS0_IPCHI2_OWNPV",
+        "KS0_FD_OWNPV",
+        "KS0_FDCHI2_OWNPV",
+        "KS0_FD_ORIVX",
+        "KS0_FDCHI2_ORIVX",
+        "KS0_ORIVX_CHI2",
+//        "KS0_DIRA_ORIVX",
+        "KS0_FDCHI2_OWNPV",
+        "KS0_OWNPV_CHI2",
+        "Pi_Plus_KS0_IPCHI2_OWNPV",
+        "Pi_Minus_KS0_IPCHI2_OWNPV"
+    //    "KS0_CosTheta"
 //		"deltaR_Ks0Pi", 				//później
 //		"KS0_CosTheta",
 //		"K_Plus_D_PIDK",
@@ -135,7 +153,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//TFile *output  = new TFile("/home/sowrol/repo/Results_cascade1_job2.root", "RECREATE");
 
 	// file for post_BDT ana:
-	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_OTP.root"; 							//?????
+	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2.root"; 							//?????
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
@@ -240,7 +258,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 	Double_t BDT_response; 
 
-	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_OTP/";
+	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights/";
 	TString prefix2 = "TMVAClassification";
 	TString methodName2 = "BDTG method";
 	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
