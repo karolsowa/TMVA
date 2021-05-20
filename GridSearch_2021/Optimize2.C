@@ -40,6 +40,24 @@ void Optimize2(){
         "maxD_GhostProb",
         "minIPchi2_D_childs",
         "D0_Dist_z",
+        "maxK0_GhostProb",
+        "minIPchi2_K0_childs",
+        "deltaR_Ks0Pi",                 
+        "KS0_ENDVERTEX_CHI2",
+        "KS0_PT",
+        "KS0_IP_OWNPV",
+        "KS0_IPCHI2_OWNPV",
+        "KS0_FD_OWNPV",
+        "KS0_FDCHI2_OWNPV",
+        "KS0_FD_ORIVX",
+        "KS0_FDCHI2_ORIVX",
+        "KS0_ORIVX_CHI2",
+//        "KS0_DIRA_ORIVX",
+//        "KS0_FDCHI2_OWNPV",
+        "KS0_OWNPV_CHI2",
+        "Pi_Plus_KS0_IPCHI2_OWNPV",
+        "Pi_Minus_KS0_IPCHI2_OWNPV"
+    //    "KS0_CosTheta"
 //		"deltaR_Ks0Pi", 				//później
 //		"KS0_CosTheta",
 //		"K_Plus_D_PIDK",
@@ -48,6 +66,7 @@ void Optimize2(){
 //		"Pi_Plus_KS0_PIDK",
 //		"Pi_Minus_KS0_PIDK",
 //		"Pi_Plus_PIDK" 
+
 
 	};
 	std::vector<TString> spectators2 = {};
@@ -77,7 +96,7 @@ void Optimize2(){
 	background2->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
 	inputTree2->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
 
-	TString myfile2 =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1_and_2.root";
+	//TString myfile2 =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1_and_2.root";
 
 	Double_t signal_weight2     = 1.0;
 	Double_t background_weight2 = 1.0;
