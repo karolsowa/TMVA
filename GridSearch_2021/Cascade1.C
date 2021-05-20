@@ -32,9 +32,9 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights" + name_tstr;
+	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights" + "_GS";//name_tstr;
 	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
-	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2.root";
+	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_GS.root";
 	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";
 	gSystem->RedirectOutput(screen, "a");
 	//fXaxis.GetNbins();
@@ -153,7 +153,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//TFile *output  = new TFile("/home/sowrol/repo/Results_cascade1_job2.root", "RECREATE");
 
 	// file for post_BDT ana:
-	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2.root"; 							//?????
+	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root"; 							//?????
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
@@ -217,77 +217,77 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//std::cout<<"File closed"<<"\n";
 	delete factory;
 
-// 	std::cout << "==> Start TMVAClassificationApplication" << std::endl;
-// // ---- Creating reader based on weight file 
-// 	TMVA::Reader *reader = new TMVA::Reader("!Color:!Silent");
-// 	//The only options are the booleans:Vfor verbose,Color for coloured output, and Silent to suppress all output
-// 	TObjArray *branches= inputTree->GetListOfBranches();
-// 	unsigned long size = (unsigned long) branches->GetEntries();
-// 	/*TIter myiter(branches);
-// 	TBranch *myobject;
-// 	Int_t i = 1;
-// 	while ((myobject = (TBranch *)myiter.Next())) {				//Just a check if it works
-// 		std::cout<<i<<std::endl;
-// 		i++;
-// 	}
-// 	std::cout<<size<<std::endl;*/
-// 	std::vector<Double_t> values_variables(variables.size());
-// 	std::vector<Double_t> values_spectators(spectators.size());
+	std::cout << "==> Start TMVAClassificationApplication" << std::endl;
+// ---- Creating reader based on weight file 
+	TMVA::Reader *reader = new TMVA::Reader("!Color:!Silent");
+	//The only options are the booleans:Vfor verbose,Color for coloured output, and Silent to suppress all output
+	TObjArray *branches= inputTree->GetListOfBranches();
+	unsigned long size = (unsigned long) branches->GetEntries();
+	/*TIter myiter(branches);
+	TBranch *myobject;
+	Int_t i = 1;
+	while ((myobject = (TBranch *)myiter.Next())) {				//Just a check if it works
+		std::cout<<i<<std::endl;
+		i++;
+	}
+	std::cout<<size<<std::endl;*/
+	std::vector<Double_t> values_variables(variables.size());
+	std::vector<Double_t> values_spectators(spectators.size());
 
 
-// 	for (unsigned i= 0; i < variables.size(); ++i) {
-// 		TString variableName = variables[i];
-//       	inputTree->SetBranchAddress(variableName, &values_variables[i]);		//Pojawiają się błędy i trudno, tak, ma być
-// 	}
-// 	for (unsigned i= 0; i < spectators.size(); ++i) {
-// 		TString variableName = spectators[i];
-// 		inputTree->SetBranchAddress(variableName, &values_spectators[i]);
-// 	}
+	for (unsigned i= 0; i < variables.size(); ++i) {
+		TString variableName = variables[i];
+      	inputTree->SetBranchAddress(variableName, &values_variables[i]);		//Pojawiają się błędy i trudno, tak, ma być
+	}
+	for (unsigned i= 0; i < spectators.size(); ++i) {
+		TString variableName = spectators[i];
+		inputTree->SetBranchAddress(variableName, &values_spectators[i]);
+	}
 
-// 	std::vector<Float_t> values_variables_reader(variables.size());
-// 	std::vector<Float_t> values_spectators_reader(spectators.size());
+	std::vector<Float_t> values_variables_reader(variables.size());
+	std::vector<Float_t> values_spectators_reader(spectators.size());
 
-// 	for (unsigned i = 0; i < variables.size(); ++i) {
-// 		reader->AddVariable(variables[i], &values_variables_reader[i]);
-// 		//reader->AddVariable("log("+variables[i]+")", &values_variables_reader[i]);
-// 	}
-// 	for (unsigned i = 0; i < spectators.size(); ++i) {
-// 		reader->AddSpectator(spectators[i], &values_spectators_reader[i]);
-// 		//reader->AddSpectator("log("+variables[i]+")", &values_spectators_reader[i]);
-// 	}
+	for (unsigned i = 0; i < variables.size(); ++i) {
+		reader->AddVariable(variables[i], &values_variables_reader[i]);
+		//reader->AddVariable("log("+variables[i]+")", &values_variables_reader[i]);
+	}
+	for (unsigned i = 0; i < spectators.size(); ++i) {
+		reader->AddSpectator(spectators[i], &values_spectators_reader[i]);
+		//reader->AddSpectator("log("+variables[i]+")", &values_spectators_reader[i]);
+	}
 
-// 	Double_t BDT_response; 
+	Double_t BDT_response; 
 
-// 	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights/";
-// 	TString prefix2 = "TMVAClassification";
-// 	TString methodName2 = "BDTG method";
-// 	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
+	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_GS/";
+	TString prefix2 = "TMVAClassification";
+	TString methodName2 = "BDTG method";
+	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
 
 
-// 	reader->BookMVA(methodName2, weightfile2);
+	reader->BookMVA(methodName2, weightfile2);
 
-// 	Int_t nEvent2 = (Int_t) inputTree->GetEntries();				//Tu się steruje tym czy się puszcza po wszystkich wydarzeniach czy po 1000 tylko
-// 	//Int_t nEvent2 = 1000;
+	Int_t nEvent2 = (Int_t) inputTree->GetEntries();				//Tu się steruje tym czy się puszcza po wszystkich wydarzeniach czy po 1000 tylko
+	//Int_t nEvent2 = 1000;
 
-// 	TFile *newfile = new TFile(myfile,"recreate");					//myfile to nazwa pliku - post BDT analysis
-// 	TTree *newtree = inputTree->CloneTree(0);						//Czy to kopiuje tylko nazwy, bez zawartości?
-// 	TBranch *myBDTr = newtree->Branch("BDT_response", &BDT_response);
+	TFile *newfile = new TFile(myfile,"recreate");					//myfile to nazwa pliku - post BDT analysis
+	TTree *newtree = inputTree->CloneTree(0);						//Czy to kopiuje tylko nazwy, bez zawartości?
+	TBranch *myBDTr = newtree->Branch("BDT_response", &BDT_response);
 
-// 	for (Long64_t ievt2=0; ievt2<nEvent2; ievt2++) {
-// 		inputTree->GetEntry(ievt2);
-// 		if(ievt2 % 10000 == 0) cout << " Processed: " << ievt2 << " entries " <<endl;			//Czyli to wypisywanie jest zadane, nie defaultowe
-// 		for (unsigned j=0; j<variables.size(); j++) 
-// 				values_variables_reader[j]=(float)values_variables[j];     
+	for (Long64_t ievt2=0; ievt2<nEvent2; ievt2++) {
+		inputTree->GetEntry(ievt2);
+		if(ievt2 % 10000 == 0) cout << " Processed: " << ievt2 << " entries " <<endl;			//Czyli to wypisywanie jest zadane, nie defaultowe
+		for (unsigned j=0; j<variables.size(); j++) 
+				values_variables_reader[j]=(float)values_variables[j];     
 
-// 		for (unsigned j=0; j<spectators.size(); j++)
-// 				values_spectators_reader[j]=(float)values_spectators[j];
-// 		BDT_response = reader->EvaluateMVA("BDTG method");
-// 		newtree->Fill();
+		for (unsigned j=0; j<spectators.size(); j++)
+				values_spectators_reader[j]=(float)values_spectators[j];
+		BDT_response = reader->EvaluateMVA("BDTG method");
+		newtree->Fill();
 
-// 	}	
-// 	newfile->Write();
-// 	delete newfile;
-// 	delete reader;
+	}	
+	newfile->Write();
+	delete newfile;
+	delete reader;
 
 	//return AUC;
 
