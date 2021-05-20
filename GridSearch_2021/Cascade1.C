@@ -32,7 +32,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights" + "_GS";//name_tstr;
+	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_GS";//name_tstr;
 	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
 	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_GS.root";
 	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";
