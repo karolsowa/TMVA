@@ -32,9 +32,9 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_GS";//name_tstr;
+	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_HPO";//name_tstr;
 	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
-	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_GS.root";
+	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_HPO.root";
 	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";
 	gSystem->RedirectOutput(screen, "a");
 	//fXaxis.GetNbins();
@@ -153,7 +153,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//TFile *output  = new TFile("/home/sowrol/repo/Results_cascade1_job2.root", "RECREATE");
 
 	// file for post_BDT ana:
-	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root"; 							//?????
+	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root"; 							//?????
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
@@ -258,7 +258,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 	Double_t BDT_response; 
 
-	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_GS/";
+	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_HPO/";
 	TString prefix2 = "TMVAClassification";
 	TString methodName2 = "BDTG method";
 	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
