@@ -24,7 +24,7 @@ void ClassifierCompare(bool mode = 1){
     TTreeReaderValue<Double_t> GS_B_M(*GS_fReader, "B_M");
     TTreeReaderValue<Double_t> GS_D0_M(*GS_fReader, "D0_M");
     TTreeReaderValue<Double_t> GS_BDT_response(*GS_fReader, "BDT_response");
-    TTreeReaderValue<Double_t> GS_KS0_M(*GS_fReader, "KS0_M")
+    TTreeReaderValue<Double_t> GS_KS0_M(*GS_fReader, "KS0_M");
     TTreeReaderValue<Double_t> HPO_B_M(*HPO_fReader, "B_M");
     TTreeReaderValue<Double_t> HPO_D0_M(*HPO_fReader, "D0_M");
     TTreeReaderValue<Double_t> HPO_BDT_response(*HPO_fReader, "BDT_response");
