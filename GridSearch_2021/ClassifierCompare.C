@@ -24,12 +24,15 @@ void ClassifierCompare(bool mode = 1){
     TTreeReaderValue<Double_t> GS_B_M(*GS_fReader, "B_M");
     TTreeReaderValue<Double_t> GS_D0_M(*GS_fReader, "D0_M");
     TTreeReaderValue<Double_t> GS_BDT_response(*GS_fReader, "BDT_response");
+    TTreeReaderValue<Double_t> GS_KS0_M(*GS_fReader, "KS0_M")
     TTreeReaderValue<Double_t> HPO_B_M(*HPO_fReader, "B_M");
     TTreeReaderValue<Double_t> HPO_D0_M(*HPO_fReader, "D0_M");
     TTreeReaderValue<Double_t> HPO_BDT_response(*HPO_fReader, "BDT_response");
+    TTreeReaderValue<Double_t> HPO_KS0_M(*HPO_fReader, "KS0_M")
     // TTreeReaderValue<Double_t> OTP_B_M(*OTP_fReader, "B_M");
     // TTreeReaderValue<Double_t> OTP_D0_M(*OTP_fReader, "D0_M");
     // TTreeReaderValue<Double_t> OTP_BDT_response(*OTP_fReader, "BDT_response");
+    // TTreeReaderValue<Double_t> OTP_KS0_M(*OTP_fReader, "KS0_M")
 
     TH1D* B_GS;
     TH1D* B_HPO;
@@ -37,6 +40,9 @@ void ClassifierCompare(bool mode = 1){
     TH1D* D_GS;    
     TH1D* D_HPO;
     //TH1D* D_OTP;
+    TH1D* KS0_GS;
+    TH1D* KS0_HPO;
+    //TH1D* KS0_OTP; 
 
     const Double_t BDT_GS = 0.42683;//0.69869;
     const Double_t BDT_HPO = 0.288832;//0.210812;
@@ -47,9 +53,14 @@ void ClassifierCompare(bool mode = 1){
    	Double_t max_Bmass = 6100; //5.6
     Double_t min_D0mass = 1810; // 1.820;  
     Double_t max_D0mass =1950; // 2.02;
+    Double_t min_Ks0mass = 450;
+    Double_t max_Ks0mass = 550;
+    Double_t min_Kstmass = 400;
+    Double_t max_Kstmass = 4500;
 
     Int_t B_NBINS = 80;
     Int_t D_NBINS = 100;
+    Int_t K_NBINS = 50;
 
     B_GS = new TH1D("B_GS","B_OTP" , B_NBINS, min_Bmass, max_Bmass ); 
     B_HPO = new TH1D("B_HPO","B_HPO" , B_NBINS, min_Bmass, max_Bmass );
@@ -59,11 +70,16 @@ void ClassifierCompare(bool mode = 1){
     D_HPO = new TH1D("Ds_HPO" , "Ds_HPO" ,D_NBINS, min_D0mass, max_D0mass);
     //D_OTP = new TH1D("Ds_OTP" , "Ds_OTP" ,D_NBINS, min_D0mass, max_D0mass);
 
+    K_GS = new TH1D("K_GS" , "K_GS" ,K_NBINS, min_Ks0mass, max_Ks0mass);
+    K_HPO = new TH1D("K_HPO" , "K_HPO" ,K_NBINS, min_Ks0mass, max_Ks0mass);
+    //K_OTP = new TH1D("K_OTP" , "K_OTP" ,K_NBINS, min_Ks0mass, max_Ks0mass);
+
 
     while (GS_fReader->Next()){
    		if(*GS_BDT_response > BDT_GS){
         	B_GS->Fill(*GS_B_M);
         	D_GS->Fill(*GS_D0_M);
+            K_GS->Fill(*GS_KS0_M);
    		}
     }
 
@@ -71,6 +87,7 @@ void ClassifierCompare(bool mode = 1){
     	if(*HPO_BDT_response > BDT_HPO){
         	B_HPO->Fill(*HPO_B_M);
         	D_HPO->Fill(*HPO_D0_M);
+            K_HPO->Fill(*HPO_KS0_M);
    		}
     }
 
@@ -78,6 +95,7 @@ void ClassifierCompare(bool mode = 1){
     // 	if(*OTP_BDT_response > BDT_OTP){
     //     	B_OTP->Fill(*OTP_B_M);
     //     	D_OTP->Fill(*OTP_D0_M);
+    //      K_OTP->Fill(*OTP_KSO_M);  
    	// 	}
     // }
 
@@ -135,6 +153,31 @@ void ClassifierCompare(bool mode = 1){
     //if (mode)
     //    D_legend->AddEntry(D_OTP, "OTP ", "l");
     D_legend->Draw();
+
+    TCanvas* K_can = new TCanvas("K_can", "K_can", 0, 0, 800, 600);
+    gPad->SetRightMargin(0.05);
+    gPad->SetLeftMargin(0.15);
+    gStyle->SetOptStat(0);
+    K_GS->SetLineColor(kBlue);
+    K_HPO->SetLineColor(kRed);
+    //D_OTP->SetLineColor(kGreen);
+    K_HPO->SetXTitle("Mass [MeV/c^2]");
+    K_HPO->SetYTitle("Events");
+    K_HPO->SetTitle("D0 mass");
+    K_HPO->GetYaxis()->SetTitleOffset(1.5);
+    auto K_legend = new TLegend(0.8,0.7,0.95,0.9);
+    if (mode)
+        K_HPO->GetYaxis()->SetRangeUser(0,50000);
+    K_HPO->Draw();
+    K_GS->Draw("SameHist");
+    //if (mode)
+    //    D_OTP->Draw("SameHist");
+
+    K_legend->AddEntry(K_GS, "GridSearch ", "l");
+    K_legend->AddEntry(K_HPO, "HPO ", "l");
+    //if (mode)
+    //    D_legend->AddEntry(D_OTP, "OTP ", "l");
+    K_legend->Draw();
     
     //myFile->Close();
     //delete fReader;
