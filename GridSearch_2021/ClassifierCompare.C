@@ -163,7 +163,7 @@ void ClassifierCompare(bool mode = 1){
     //D_OTP->SetLineColor(kGreen);
     K_HPO->SetXTitle("Mass [MeV/c^2]");
     K_HPO->SetYTitle("Events");
-    K_HPO->SetTitle("D0 mass");
+    K_HPO->SetTitle("KS0 mass");
     K_HPO->GetYaxis()->SetTitleOffset(1.5);
     auto K_legend = new TLegend(0.8,0.7,0.95,0.9);
     if (mode)
