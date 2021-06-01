@@ -32,7 +32,7 @@ void Signal(bool mode = 1){
     TTreeReaderValue<Double_t> OTP_B_M(*OTP_fReader, "B_M");
     TTreeReaderValue<Double_t> OTP_D0_M(*OTP_fReader, "D0_M");
     TTreeReaderValue<Double_t> OTP_BDT_response(*OTP_fReader, "BDT_response");
-    TTreeReaderValue<Double_t> OTP_KS0_M(*OTP_fReader, "KS0_M")
+    TTreeReaderValue<Double_t> OTP_KS0_M(*OTP_fReader, "KS0_M");
 
     TH1D* B_GS;
     TH1D* B_HPO;
@@ -43,10 +43,13 @@ void Signal(bool mode = 1){
     TH1D* K_GS;
     TH1D* K_HPO;
     TH1D* KS0_OTP; 
+    TH1D* B_all;
+    TH1D* D_all;
+    TH1D* K_all;
 
-    const Double_t BDT_GS = 0.42683;//0.69869;
-    const Double_t BDT_HPO = 0.288832;//0.210812;
-    //const Double_t BDT_OTP = 0.0884549;
+    const Double_t BDT_GS = 0.69869;//0.42683;//
+    const Double_t BDT_HPO = 0.210812;//0.288832;//
+    const Double_t BDT_OTP = 0.0884549;
     
 
     Double_t min_Bmass = 4600;
