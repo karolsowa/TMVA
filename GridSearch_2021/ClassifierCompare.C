@@ -6,6 +6,7 @@
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
 #include <string>
+#include <lhcbStyle.h>
 
 
 void ClassifierCompare(bool mode = 1){
