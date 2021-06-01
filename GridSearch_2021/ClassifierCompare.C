@@ -7,7 +7,7 @@
 #include <TTreeReaderArray.h>
 #include <string>
 
-
+using namespace LHCbStyle;
 
 void ClassifierCompare(bool mode = 1){
 	gROOT->Reset();
