@@ -10,8 +10,8 @@
 
 void ClassifierCompare(bool mode = 1){
 	//gROOT->Reset();
-    gROOT->ProcessLine(".L lhcbstyle.C");
-    lhcbStyle();
+    // gROOT->ProcessLine(".L lhcbstyle.C");
+    // lhcbStyle();
 	TString GS_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root";
 	//TString OTP_filename = "/home/sowrol/repo/MyBDT_cascade1_job2_OTP.root";
