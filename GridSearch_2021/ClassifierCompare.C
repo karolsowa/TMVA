@@ -7,7 +7,6 @@
 #include <TTreeReaderArray.h>
 #include <string>
 
-using namespace LHCbStyle;
 
 void ClassifierCompare(bool mode = 1){
 	gROOT->Reset();
@@ -126,8 +125,7 @@ void ClassifierCompare(bool mode = 1){
     //if (mode)
     //    B_legend->AddEntry(B_OTP, "OTP ", "l");
     B_legend->Draw();
-    
-    
+    LHCbStyle::lhcbName->Draw("same");
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
     gPad->SetRightMargin(0.05);
