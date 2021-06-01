@@ -103,7 +103,7 @@ void Signal(bool mode = 1){
     	if(*OTP_BDT_response > BDT_OTP){
         	B_OTP->Fill(*OTP_B_M);
         	D_OTP->Fill(*OTP_D0_M);
-            K_OTP->Fill(*OTP_KSO_M);  
+            K_OTP->Fill(*OTP_KS0_M);  
    		}
     }
 
