@@ -6,6 +6,7 @@
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
 #include <string>
+#include "lhcbstyle.c"
 
 
 void Signal(bool mode = 1){
