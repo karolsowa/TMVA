@@ -12,7 +12,8 @@
 void Signal(bool mode = 1){
 	//gROOT->Reset();
     //gROOT->ProcessLine(".L /home/sowrol/lhcbStyle.c");
-    styleptr = lhcbStyle();
+    TStyle *LHCbStyle= new TStyle("LHCbStyle","LHCb plots style");
+    lhcbStyle(LHCbStyle);
 	TString GS_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_HPO.root";
 	TString OTP_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_OTP.root";
@@ -81,14 +82,14 @@ void Signal(bool mode = 1){
     K_OTP = new TH1D("K_OTP" , "K_OTP" ,K_NBINS, min_Ks0mass, max_Ks0mass);
     K_all = new TH1D("K_all" , "K_all" ,K_NBINS, min_Ks0mass, max_Ks0mass);
 
-    styleptr->SetTitleSize(0.02,"x");
-    styleptr->SetTitleSize(0.02,"y");
-    styleptr->SetTitleSize(0.02,"z");
-    styleptr->SetLabelSize(0.02,"x");
-    styleptr->SetLabelSize(0.02,"y");
-    styleptr->SetLabelSize(0.02,"z");
+    // styleptr->SetTitleSize(0.02,"x");
+    // styleptr->SetTitleSize(0.02,"y");
+    // styleptr->SetTitleSize(0.02,"z");
+    // styleptr->SetLabelSize(0.02,"x");
+    // styleptr->SetLabelSize(0.02,"y");
+    // styleptr->SetLabelSize(0.02,"z");
 
-    gROOT->SetStyle("lhcbStyle");
+    gROOT->SetStyle("LHCbStyle");
     gROOT->ForceStyle();
 
     while (GS_fReader->Next()){
