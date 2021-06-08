@@ -69,7 +69,6 @@ void Signal(bool mode = 1){
 
 
     LHCbStyle->SetTitleSize(0.06,"x");
-    LHCbStyle->SetMaxDigitsY(6);
     // styleptr->SetTitleSize(0.02,"y");
     // styleptr->SetTitleSize(0.02,"z");
     //LHCbStyle->SetLabelSize(0.02,"x");
@@ -134,6 +133,7 @@ void Signal(bool mode = 1){
     B_all->SetXTitle("Mass [MeV/c^{2}]");
     B_all->SetYTitle("Events");
     B_all->SetTitle("B mass");
+    B_all->GetYaxis()->SetMaxDigits(4);
     gStyle->SetLabelSize(0.1,"x");
     //B_all->GetYaxis()->SetTitleOffset(1.5);
 
@@ -165,6 +165,7 @@ void Signal(bool mode = 1){
     D_all->SetXTitle("Mass [MeV/c^{2}]");
     D_all->SetYTitle("Events");
     D_all->SetTitle("D0 mass");
+    D_all->GetYaxis()->SetMaxDigits(4);
     //D_all->GetYaxis()->SetTitleOffset(1.5);
     auto D_legend = new TLegend(0.75,0.7,0.9,0.9);
     // if (mode)
@@ -193,6 +194,7 @@ void Signal(bool mode = 1){
     K_all->SetXTitle("Mass [MeV/c^{2}]");
     K_all->SetYTitle("Events");
     K_all->SetTitle("KS0 mass");
+    K_all->GetYaxis()->SetMaxDigits(4);
     //K_all->GetYaxis()->SetTitleOffset(1.5);
     auto K_legend = new TLegend(0.75,0.7,0.9,0.9);
     // if (mode)
