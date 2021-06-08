@@ -67,11 +67,11 @@ void Signal(bool mode = 1){
     Int_t D_NBINS = 100;
     Int_t K_NBINS = 50;
 
-    
-    LHCbStyle->SetTitleSize(0.02,"x");
+
+    LHCbStyle->SetTitleSize(0.06,"x");
     // styleptr->SetTitleSize(0.02,"y");
     // styleptr->SetTitleSize(0.02,"z");
-    LHCbStyle->SetLabelSize(0.02,"x");
+    //LHCbStyle->SetLabelSize(0.02,"x");
     // styleptr->SetLabelSize(0.02,"y");
     // styleptr->SetLabelSize(0.02,"z");
 
