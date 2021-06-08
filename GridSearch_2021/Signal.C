@@ -84,6 +84,9 @@ void Signal(bool mode = 1){
     styleptr->SetTitleSize(0.02,"x");
     styleptr->SetTitleSize(0.02,"y");
     styleptr->SetTitleSize(0.02,"z");
+    styleptr->SetLabelSize(0.02,"x");
+    styleptr->SetLabelSize(0.02,"y");
+    styleptr->SetLabelSize(0.02,"z");
 
     gROOT->SetStyle("lhcbStyle");
     gROOT->ForceStyle();
