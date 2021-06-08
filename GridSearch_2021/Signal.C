@@ -85,6 +85,9 @@ void Signal(bool mode = 1){
     styleptr->SetTitleSize(0.04,"y");
     styleptr->SetTitleSize(0.04,"z");
 
+    gROOT->SetStyle("styleptr");
+    gROOT->ForceStyle();
+
     while (GS_fReader->Next()){
         B_all->Fill(*GS_B_M);
         D_all->Fill(*GS_D0_M);
