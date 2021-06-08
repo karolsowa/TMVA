@@ -82,10 +82,10 @@ void Signal(bool mode = 1){
     K_OTP = new TH1D("K_OTP" , "K_OTP" ,K_NBINS, min_Ks0mass, max_Ks0mass);
     K_all = new TH1D("K_all" , "K_all" ,K_NBINS, min_Ks0mass, max_Ks0mass);
 
-    // styleptr->SetTitleSize(0.02,"x");
+    LHCbStyle->SetTitleSize(0.02,"x");
     // styleptr->SetTitleSize(0.02,"y");
     // styleptr->SetTitleSize(0.02,"z");
-    // styleptr->SetLabelSize(0.02,"x");
+    LHCbStyle->SetLabelSize(0.02,"x");
     // styleptr->SetLabelSize(0.02,"y");
     // styleptr->SetLabelSize(0.02,"z");
 
