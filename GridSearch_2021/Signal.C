@@ -117,7 +117,7 @@ void Signal(bool mode = 1){
     B_GS->SetLineColor(kBlue);
     B_HPO->SetLineColor(kRed);
     B_OTP->SetLineColor(kGreen);
-    B_all->SetXTitle("Mass [MeV/c^2]");
+    B_all->SetXTitle("Mass [MeV/c^{2}]");
     B_all->SetYTitle("Events");
     B_all->SetTitle("B mass");
     //B_all->GetYaxis()->SetTitleOffset(1.5);
@@ -146,7 +146,7 @@ void Signal(bool mode = 1){
     D_GS->SetLineColor(kBlue);
     D_HPO->SetLineColor(kRed);
     D_OTP->SetLineColor(kGreen);
-    D_all->SetXTitle("Mass [MeV/c^2]");
+    D_all->SetXTitle("Mass [MeV/c^{2}]");
     D_all->SetYTitle("Events");
     D_all->SetTitle("D0 mass");
     //D_all->GetYaxis()->SetTitleOffset(1.5);
@@ -174,7 +174,7 @@ void Signal(bool mode = 1){
     K_GS->SetLineColor(kBlue);
     K_HPO->SetLineColor(kRed);
     K_OTP->SetLineColor(kGreen);
-    K_all->SetXTitle("Mass [MeV/c^2]");
+    K_all->SetXTitle("Mass [MeV/c^{2}]");
     K_all->SetYTitle("Events");
     K_all->SetTitle("KS0 mass");
     //K_all->GetYaxis()->SetTitleOffset(1.5);
