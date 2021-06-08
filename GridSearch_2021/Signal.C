@@ -110,8 +110,8 @@ void Signal(bool mode = 1){
 
 
     TCanvas* B_can = new TCanvas("B_can", "B_can", 0, 0, 800, 600);
-    gPad->SetRightMargin(0.05);
-    gPad->SetLeftMargin(0.15);
+    //gPad->SetRightMargin(0.05);
+    //gPad->SetLeftMargin(0.15);
     gStyle->SetOptStat(0);
     B_all->SetLineColor(kBlack);
     B_GS->SetLineColor(kBlue);
@@ -120,7 +120,7 @@ void Signal(bool mode = 1){
     B_all->SetXTitle("Mass [MeV/c^2]");
     B_all->SetYTitle("Events");
     B_all->SetTitle("B mass");
-    B_all->GetYaxis()->SetTitleOffset(1.5);
+    //B_all->GetYaxis()->SetTitleOffset(1.5);
 
     // if (mode)
     //     B_HPO->GetYaxis()->SetRangeUser(0,50000);
@@ -139,8 +139,8 @@ void Signal(bool mode = 1){
     B_legend->Draw();
 
     TCanvas* D_can = new TCanvas("D_can", "D_can", 0, 0, 800, 600);
-    gPad->SetRightMargin(0.05);
-    gPad->SetLeftMargin(0.15);
+    //gPad->SetRightMargin(0.05);
+    //gPad->SetLeftMargin(0.15);
     gStyle->SetOptStat(0);
     D_all->SetLineColor(kBlack);
     D_GS->SetLineColor(kBlue);
@@ -149,7 +149,7 @@ void Signal(bool mode = 1){
     D_all->SetXTitle("Mass [MeV/c^2]");
     D_all->SetYTitle("Events");
     D_all->SetTitle("D0 mass");
-    D_all->GetYaxis()->SetTitleOffset(1.5);
+    //D_all->GetYaxis()->SetTitleOffset(1.5);
     auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
     // if (mode)
     //     D_HPO->GetYaxis()->SetRangeUser(0,50000);
@@ -167,8 +167,8 @@ void Signal(bool mode = 1){
     D_legend->Draw();
 
     TCanvas* K_can = new TCanvas("K_can", "K_can", 0, 0, 800, 600);
-    gPad->SetRightMargin(0.05);
-    gPad->SetLeftMargin(0.15);
+    //gPad->SetRightMargin(0.05);
+    //gPad->SetLeftMargin(0.15);
     gStyle->SetOptStat(0);
     K_all->SetLineColor(kBlack);
     K_GS->SetLineColor(kBlue);
@@ -177,7 +177,7 @@ void Signal(bool mode = 1){
     K_all->SetXTitle("Mass [MeV/c^2]");
     K_all->SetYTitle("Events");
     K_all->SetTitle("KS0 mass");
-    K_all->GetYaxis()->SetTitleOffset(1.5);
+    //K_all->GetYaxis()->SetTitleOffset(1.5);
     auto K_legend = new TLegend(0.8,0.7,0.95,0.9);
     // if (mode)
         // K_HPO->GetYaxis()->SetRangeUser(0,50000);
