@@ -85,7 +85,7 @@ void Signal(bool mode = 1){
     styleptr->SetTitleSize(0.04,"y");
     styleptr->SetTitleSize(0.04,"z");
 
-    gROOT->SetStyle("styleptr");
+    gROOT->SetStyle("lhcbStyle");
     gROOT->ForceStyle();
 
     while (GS_fReader->Next()){
