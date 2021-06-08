@@ -130,6 +130,7 @@ void Signal(bool mode = 1){
     B_all->SetXTitle("Mass [MeV/c^{2}]");
     B_all->SetYTitle("Events");
     B_all->SetTitle("B mass");
+    gStyle->SetLabelSize(0.15,"x");
     //B_all->GetYaxis()->SetTitleOffset(1.5);
 
     // if (mode)
