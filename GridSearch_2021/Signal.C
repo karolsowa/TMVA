@@ -69,11 +69,10 @@ void Signal(bool mode = 1){
 
 
     LHCbStyle->SetTitleSize(0.06,"x");
-    // styleptr->SetTitleSize(0.02,"y");
-    // styleptr->SetTitleSize(0.02,"z");
-    //LHCbStyle->SetLabelSize(0.02,"x");
-    // styleptr->SetLabelSize(0.02,"y");
-    // styleptr->SetLabelSize(0.02,"z");
+    LHCbStyle->SetPadTopMargin(0.07);
+    //lhcbStyle->SetPadRightMargin(0.05); // increase for colz plots
+    LHCbStyle->SetPadBottomMargin(0.14);
+    //lhcbStyle->SetPadLeftMargin(0.14);
 
     gROOT->SetStyle("LHCbStyle");
     gROOT->ForceStyle();
