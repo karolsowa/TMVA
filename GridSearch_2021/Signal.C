@@ -67,6 +67,17 @@ void Signal(bool mode = 1){
     Int_t D_NBINS = 100;
     Int_t K_NBINS = 50;
 
+    
+    LHCbStyle->SetTitleSize(0.02,"x");
+    // styleptr->SetTitleSize(0.02,"y");
+    // styleptr->SetTitleSize(0.02,"z");
+    LHCbStyle->SetLabelSize(0.02,"x");
+    // styleptr->SetLabelSize(0.02,"y");
+    // styleptr->SetLabelSize(0.02,"z");
+
+    gROOT->SetStyle("LHCbStyle");
+    gROOT->ForceStyle();
+
     B_GS = new TH1D("B_GS","B_GS" , B_NBINS, min_Bmass, max_Bmass ); 
     B_HPO = new TH1D("B_HPO","B_HPO" , B_NBINS, min_Bmass, max_Bmass );
     B_OTP = new TH1D("B_OTP","B_OTP" , B_NBINS, min_Bmass, max_Bmass );
@@ -82,15 +93,6 @@ void Signal(bool mode = 1){
     K_OTP = new TH1D("K_OTP" , "K_OTP" ,K_NBINS, min_Ks0mass, max_Ks0mass);
     K_all = new TH1D("K_all" , "K_all" ,K_NBINS, min_Ks0mass, max_Ks0mass);
 
-    LHCbStyle->SetTitleSize(0.02,"x");
-    // styleptr->SetTitleSize(0.02,"y");
-    // styleptr->SetTitleSize(0.02,"z");
-    LHCbStyle->SetLabelSize(0.02,"x");
-    // styleptr->SetLabelSize(0.02,"y");
-    // styleptr->SetLabelSize(0.02,"z");
-
-    gROOT->SetStyle("LHCbStyle");
-    gROOT->ForceStyle();
 
     while (GS_fReader->Next()){
         B_all->Fill(*GS_B_M);
