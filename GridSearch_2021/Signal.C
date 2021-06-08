@@ -6,12 +6,12 @@
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
 #include <string>
-#include "/home/sowrol/lhcbstyle.c"
+//#include "/home/sowrol/lhcbstyle.c"
 
 
 void Signal(bool mode = 1){
 	//gROOT->Reset();
-    gROOT->ProcessLine(".L /home/sowrol/lhcbstyle.c");
+    gROOT->ProcessLine(".L /home/sowrol/lhcbStyle.c");
     lhcbStyle();
 	TString GS_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_HPO.root";
