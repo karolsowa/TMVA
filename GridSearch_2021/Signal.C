@@ -44,7 +44,7 @@ void Signal(bool mode = 1){
     TH1D* D_OTP;
     TH1D* K_GS;
     TH1D* K_HPO;
-    TH1D* KS0_OTP; 
+    TH1D* K_OTP; 
     TH1D* B_all;
     TH1D* D_all;
     TH1D* K_all;
