@@ -124,7 +124,7 @@ void Signal(bool mode = 1){
 
     // if (mode)
     //     B_HPO->GetYaxis()->SetRangeUser(0,50000);
-    auto B_legend = new TLegend(0.8,0.7,0.95,0.9);
+    auto B_legend = new TLegend(0.8,0.7,0.9,0.9);
     B_all->Draw();
     B_HPO->Draw("SameHist");
     B_GS->Draw("SameHist");
@@ -150,7 +150,7 @@ void Signal(bool mode = 1){
     D_all->SetYTitle("Events");
     D_all->SetTitle("D0 mass");
     //D_all->GetYaxis()->SetTitleOffset(1.5);
-    auto D_legend = new TLegend(0.8,0.7,0.95,0.9);
+    auto D_legend = new TLegend(0.8,0.7,0.9,0.9);
     // if (mode)
     //     D_HPO->GetYaxis()->SetRangeUser(0,50000);
     D_all->Draw();
@@ -178,7 +178,7 @@ void Signal(bool mode = 1){
     K_all->SetYTitle("Events");
     K_all->SetTitle("KS0 mass");
     //K_all->GetYaxis()->SetTitleOffset(1.5);
-    auto K_legend = new TLegend(0.8,0.7,0.95,0.9);
+    auto K_legend = new TLegend(0.8,0.7,0.9,0.9);
     // if (mode)
         // K_HPO->GetYaxis()->SetRangeUser(0,50000);
     K_all->Draw();
