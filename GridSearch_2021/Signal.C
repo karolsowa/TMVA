@@ -10,11 +10,11 @@
 
 void Signal(bool mode = 1){
 	//gROOT->Reset();
-    gROOT->ProcessLine(".L lhcbstyle.C");
+    gROOT->ProcessLine(".L /home/sowrol/lhcbstyle.c");
     lhcbStyle();
-	TString GS_filename = "/home/sowrol/repo/BD_classifier/MyBDT_cascade1_job2_GS.root";
-	TString HPO_filename = "/home/sowrol/repo/BD_classifier/MyBDT_cascade1_job2_HPO.root";
-	TString OTP_filename = "/home/sowrol/repo/BD_classifier/MyBDT_cascade1_job2_OTP.root";
+	TString GS_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_GS.root";
+	TString HPO_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_HPO.root";
+	TString OTP_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_OTP.root";
 	TFile *GS_File = TFile::Open(GS_filename);
 	TFile *HPO_File = TFile::Open(HPO_filename);
 	TFile *OTP_File = TFile::Open(OTP_filename);
