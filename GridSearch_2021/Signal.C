@@ -81,9 +81,9 @@ void Signal(bool mode = 1){
     K_OTP = new TH1D("K_OTP" , "K_OTP" ,K_NBINS, min_Ks0mass, max_Ks0mass);
     K_all = new TH1D("K_all" , "K_all" ,K_NBINS, min_Ks0mass, max_Ks0mass);
 
-    styleptr->SetTitleSize(0.9*lhcbTSize,"x");
-    styleptr->SetTitleSize(0.9*lhcbTSize,"y");
-    styleptr->SetTitleSize(0.9*lhcbTSize,"z");
+    styleptr->SetTitleSize(0.04,"x");
+    styleptr->SetTitleSize(0.04,"y");
+    styleptr->SetTitleSize(0.04,"z");
 
     while (GS_fReader->Next()){
         B_all->Fill(*GS_B_M);
