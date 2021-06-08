@@ -69,6 +69,7 @@ void Signal(bool mode = 1){
 
 
     LHCbStyle->SetTitleSize(0.06,"x");
+    LHCbStyle->GetXaxis()->SetMaxDigits(6);
     // styleptr->SetTitleSize(0.02,"y");
     // styleptr->SetTitleSize(0.02,"z");
     //LHCbStyle->SetLabelSize(0.02,"x");
