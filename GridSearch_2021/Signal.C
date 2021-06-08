@@ -141,7 +141,7 @@ void Signal(bool mode = 1){
     B_GS->Draw("SameHist");
     //if (mode)
     B_OTP->Draw("SameHist");
-    LHCbStyle::lhcbName->Draw("same");
+    //LHCbStyle::lhcbName->Draw("same");
 
     B_legend->AddEntry(B_all, "Data", "l");
     B_legend->AddEntry(B_GS, "GridSearch ", "l");
