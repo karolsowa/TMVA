@@ -12,7 +12,7 @@
 void Signal(bool mode = 1){
 	//gROOT->Reset();
     //gROOT->ProcessLine(".L /home/sowrol/lhcbStyle.c");
-    lhcbStyle();
+    //lhcbStyle();
 	TString GS_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_GS.root";
 	TString HPO_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_HPO.root";
 	TString OTP_filename = "/data1/DATA_SOWA/BD_classifier/MyBDT_cascade1_job2_OTP.root";
