@@ -162,7 +162,7 @@ void ClassifierCompare(bool mode = 1){
     gStyle->SetOptStat(0);
     K_GS->SetLineColor(kBlue);
     K_HPO->SetLineColor(kRed);
-    D_OTP->SetLineColor(kGreen);
+    K_OTP->SetLineColor(kGreen);
     K_HPO->SetXTitle("Mass [MeV/c^2]");
     K_HPO->SetYTitle("Events");
     K_HPO->SetTitle("KS0 mass");
