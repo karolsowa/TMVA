@@ -173,12 +173,12 @@ void ClassifierCompare(bool mode = 1){
     K_HPO->Draw();
     K_GS->Draw("SameHist");
     if (mode)
-        D_OTP->Draw("SameHist");
+        K_OTP->Draw("SameHist");
 
     K_legend->AddEntry(K_GS, "GridSearch ", "l");
     K_legend->AddEntry(K_HPO, "HPO ", "l");
     if (mode)
-        D_legend->AddEntry(D_OTP, "OTP ", "l");
+        K_legend->AddEntry(D_OTP, "OTP ", "l");
     K_legend->Draw();
     
     //myFile->Close();
