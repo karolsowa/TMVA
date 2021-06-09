@@ -68,7 +68,10 @@ void Signal(bool mode = 1){
     Int_t K_NBINS = 50;
 
 
-    LHCbStyle->SetTitleSize(0.06,"x");
+    LHCbStyle->SetTitleSize(0.05,"x");
+    LHCbStyle->SetTitleSize(0.05,"y");
+    LHCbStyle->SetLabelSize(0.05,"x");
+    LHCbStyle->SetLabelSize(0.05,"y");
     LHCbStyle->SetPadTopMargin(0.07);
     //lhcbStyle->SetPadRightMargin(0.05); // increase for colz plots
     LHCbStyle->SetPadBottomMargin(0.14);
