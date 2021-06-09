@@ -76,6 +76,7 @@ void Signal(bool mode = 1){
     //lhcbStyle->SetPadRightMargin(0.05); // increase for colz plots
     LHCbStyle->SetPadBottomMargin(0.14);
     LHCbStyle->SetTitleOffset(1.1,"Y");
+    LHCbStyle->SetTitleOffset(1.1,"X");
     //lhcbStyle->SetPadLeftMargin(0.14);
 
     gROOT->SetStyle("LHCbStyle");
