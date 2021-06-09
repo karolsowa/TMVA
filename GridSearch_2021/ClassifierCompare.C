@@ -45,7 +45,7 @@ void ClassifierCompare(bool mode = 1){
     TH1D* D_OTP;
     TH1D* K_GS;
     TH1D* K_HPO;
-    TH1D* KS0_OTP; 
+    TH1D* K_OTP; 
 
     const Double_t BDT_GS = 0.42683;//0.69869;
     const Double_t BDT_HPO = 0.288832;//0.210812;
