@@ -35,7 +35,7 @@ void ClassifierCompare(bool mode = 1){
     TTreeReaderValue<Double_t> OTP_B_M(*OTP_fReader, "B_M");
     TTreeReaderValue<Double_t> OTP_D0_M(*OTP_fReader, "D0_M");
     TTreeReaderValue<Double_t> OTP_BDT_response(*OTP_fReader, "BDT_response");
-    TTreeReaderValue<Double_t> OTP_KS0_M(*OTP_fReader, "KS0_M")
+    TTreeReaderValue<Double_t> OTP_KS0_M(*OTP_fReader, "KS0_M");
 
     TH1D* B_GS;
     TH1D* B_HPO;
