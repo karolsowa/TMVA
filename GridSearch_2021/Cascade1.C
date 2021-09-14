@@ -35,18 +35,18 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_HPO";//name_tstr;
 	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
 	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_HPO.root";
-	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";
+	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";						
 	gSystem->RedirectOutput(screen, "a");
 	//fXaxis.GetNbins();
 	std::cout<<"Macro starts"<<"\n";
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	TXMLEngine *eng = new TXMLEngine;
-	XMLDocPointer_t xmldoc = eng->ParseFile("/home/sowrol/repo/dataset/weights/TMVAClassification_BDTG.weights.xml",10000000);
-	XMLNodePointer_t mainnode = eng->DocGetRootElement(xmldoc);
+	// TXMLEngine *eng = new TXMLEngine;
+	// XMLDocPointer_t xmldoc = eng->ParseFile("/home/sowrol/repo/dataset/weights/TMVAClassification_BDTG.weights.xml",10000000);
+	// XMLNodePointer_t mainnode = eng->DocGetRootElement(xmldoc);
 
-	std::cout<<"TXMLEngine created"<<"\n";
+	//std::cout<<"TXMLEngine created"<<"\n";
 
 	//std::cout << std::endl << "==> Start TMVAClassification" << std::endl;
 	std::vector<TString> variables = {
