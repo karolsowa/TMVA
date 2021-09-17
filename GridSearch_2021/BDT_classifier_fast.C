@@ -21,7 +21,7 @@
 #include <chrono>
 #include <fstream>
 		
-Double_t BDT_classifier(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 15.5, int NTrees = 2000){
+Double_t BDT_classifier_fast(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSize = 15.5, int NTrees = 2000){
 
 // **************** PART 1 - ANALYSE ********************* //
 
@@ -198,68 +198,7 @@ Double_t BDT_classifier(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinN
 
 	//--------------------------------------------------------------------------------------------------------------------------------------
 
-	std::cout << "==> Starting TMVAClassificationApplication" << std::endl;
-	//Creating reader based on weight file 
-	TMVA::Reader *reader = new TMVA::Reader("!Color:!Silent");
-	//The only options are the booleans:Vfor verbose,Color for coloured output, and Silent to suppress all output
-	TObjArray *branches= inputTree->GetListOfBranches();
-	unsigned long size = (unsigned long) branches->GetEntries();
-
-	std::vector<Double_t> values_variables(variables.size());
-	std::vector<Double_t> values_spectators(spectators.size());
-
-
-	for (unsigned i= 0; i < variables.size(); ++i) {
-		TString variableName = variables[i];
-      	inputTree->SetBranchAddress(variableName, &values_variables[i]);		//Errors may appear, but we can do nothing about it
-	}
-	for (unsigned i= 0; i < spectators.size(); ++i) {
-		TString variableName = spectators[i];
-		inputTree->SetBranchAddress(variableName, &values_spectators[i]);
-	}
-
-	std::vector<Float_t> values_variables_reader(variables.size());
-	std::vector<Float_t> values_spectators_reader(spectators.size());
-
-	for (unsigned i = 0; i < variables.size(); ++i) {
-		reader->AddVariable(variables[i], &values_variables_reader[i]);
-		//reader->AddVariable("log("+variables[i]+")", &values_variables_reader[i]);
-	}
-	for (unsigned i = 0; i < spectators.size(); ++i) {
-		reader->AddSpectator(spectators[i], &values_spectators_reader[i]);
-		//reader->AddSpectator("log("+variables[i]+")", &values_spectators_reader[i]);
-	}
-
-	Double_t BDT_response; 
-	TString dir2    = weights_dir;
-	TString prefix2 = "TMVAClassification";
-	TString methodName2 = "BDTG method";
-	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
-
-
-	reader->BookMVA(methodName2, weightfile2);
-	Int_t nEvent2 = (Int_t) inputTree->GetEntries();				//Here, you can decide if you want to run your programme on a full sample or just test it on 1000 events
-	//Int_t nEvent2 = 1000;
-
-	TFile *newfile = new TFile(postBDT_file,"recreate");					//post BDT analysis file creation
-	TTree *newtree = inputTree->CloneTree(0);						
-	TBranch *myBDTr = newtree->Branch("BDT_response", &BDT_response);
-
-	for (Long64_t ievt2=0; ievt2<nEvent2; ievt2++) {
-		inputTree->GetEntry(ievt2);
-		if(ievt2 % 10000 == 0) cout << " Processed: " << ievt2 << " entries " <<endl;			
-		for (unsigned j=0; j<variables.size(); j++) 
-				values_variables_reader[j]=(float)values_variables[j];     
-
-		for (unsigned j=0; j<spectators.size(); j++)
-				values_spectators_reader[j]=(float)values_spectators[j];
-		BDT_response = reader->EvaluateMVA("BDTG method");
-		newtree->Fill();
-
-	}	
-	newfile->Write();
-	delete newfile;
-	delete reader;
+	
 	//Stops the clock's countdown
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
@@ -268,7 +207,7 @@ Double_t BDT_classifier(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinN
 	std::cout<<"BDT  cut: "<<cut<<"\n";
 	std::cout << "Elapsed time: " << floor(elapsed.count()/60) << " min "<< fmod(elapsed.count(), 60) << " s\n";
 	std::cout<<"AUC / ROC integral: "<<AUC<<"\n";
-	if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName ); 	//Comment this line if you do not want to display the GUI
+	if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName );
 	return AUC;
 	
 }
