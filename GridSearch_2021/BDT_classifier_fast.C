@@ -207,7 +207,7 @@ Double_t BDT_classifier_fast(double AdaBoostBeta = 0.6, int MaxDepth = 5, double
 	std::cout<<"BDT  cut: "<<cut<<"\n";
 	std::cout << "Elapsed time: " << floor(elapsed.count()/60) << " min "<< fmod(elapsed.count(), 60) << " s\n";
 	std::cout<<"AUC / ROC integral: "<<AUC<<"\n";
-	if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName );
+	//if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName );
 	return AUC;
 	
 }
