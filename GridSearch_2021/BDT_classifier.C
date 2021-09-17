@@ -36,7 +36,7 @@ Double_t BDT_classifier(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinN
 
 	//Weights directory name 
 	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_BDT";
-	weights_dir = "./dataset/weights_BDT/";
+	TString weights_dir = "./dataset/weights_BDT/";
 	// output file with NTUPLE:
 	TString outfileName = "./sample_decay_BDT.root";
 	// file for post_BDT ana:
