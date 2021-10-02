@@ -2,9 +2,6 @@ Welcome to BDT grid-search repository!
 
 Programs included in this repo use root TMVA toolkit
 
-###  ## ##
- #   # # #
- #   #   #
 ----------------------Section 1----------------------------
 
 				   No parallelisation
