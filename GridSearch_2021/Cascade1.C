@@ -26,29 +26,55 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 // **************** PART 1 - ANALYSE ********************* //
 	
-	
+	std::cout<<"Macro starts"<<"\n";
+
+	//Redirecting output to files:
 
 	Double_t name_file_d = round(AdaBoostBeta*100);
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_HPO";//name_tstr;
-	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
-	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_HPO.root";
-	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";						
+	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";	
 	gSystem->RedirectOutput(screen, "a");
-	//fXaxis.GetNbins();
-	std::cout<<"Macro starts"<<"\n";
+
+	//---- Add trees to respective chains:
+
+	TChain * signal  = new TChain("signal");
+	TChain * background  = new TChain("background");
+	TChain * inputTree  = new TChain("inputTree");
+
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
+	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
+	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
+	background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
+	inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
+	//inputTree->Add("/home/student/Project/B2DK0Pi/B2DK0Pi_2012MC_sig.root/DecayTree"); 
+
+	//std::cout<<"signal, bkg and input added"<<"\n";
+
+	
+	// output file with classifier performance results:
+	//TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_HPO.root";
+	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_job2_" + name_tstr +".root";
+
+
+	// output file with NTUPLE for post_BDT ana:
+	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_" + name_tstr + ".root"; 	
+
+						
+
+	//Weights directory name
+	//(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_HPO";
+	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_" + name_tstr;
+	//TString weights_dir = "/home/sowrol/repo/GridSearch_2021/dataset/weights_HPO/";
+	TString weights_dir = "/home/sowrol/repo/GridSearch_2021/dataset/weights_" + name_tstr + "/";
+
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	// TXMLEngine *eng = new TXMLEngine;
-	// XMLDocPointer_t xmldoc = eng->ParseFile("/home/sowrol/repo/dataset/weights/TMVAClassification_BDTG.weights.xml",10000000);
-	// XMLNodePointer_t mainnode = eng->DocGetRootElement(xmldoc);
 
-	//std::cout<<"TXMLEngine created"<<"\n";
 
-	//std::cout << std::endl << "==> Start TMVAClassification" << std::endl;
+	std::cout << std::endl << "==> Starting TMVAClassification" << std::endl;
 	std::vector<TString> variables = {
 		"B_ENDVERTEX_CHI2",
         "B_OWNPV_CHI2",
@@ -97,15 +123,15 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 //		"Pi_Plus_PIDK" 
 
 	};
-	std::cout<<"Created a vector of variables"<<"\n";
+	//std::cout<<"Created a vector of variables"<<"\n";
 	std::vector<TString> spectators = {};
 
-	//std::cout<<"Main node name: "<<eng->GetNodeName(mainnode)<<"\n";
+
 	TFile* outputFile = TFile::Open(outfileName, "RECREATE");
 	//std::cout<<"Opened the output file"<<"\n";
 
 	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:Silent:!Color:!DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
-	std::cout<<"Created the factory"<<"\n";
+	//std::cout<<"Created the factory"<<"\n";
 	//V- verbose flag - full information mode
 	//Silent - prevents any output from TMVA after the Factory creation
 	//Color - coloured screen output
@@ -136,24 +162,8 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 	//std::cout<<"Added variables"<<"\n";
 
-	// ---- Define signal input tree
-	TChain * signal  = new TChain("signal");
-	TChain * background  = new TChain("background");
-	TChain * inputTree  = new TChain("inputTree");
 
-	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
-	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
-	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
-	background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
-	inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
-	//inputTree->Add("/home/student/Project/B2DK0Pi/B2DK0Pi_2012MC_sig.root/DecayTree"); 
-
-	std::cout<<"signal, bkg and input added"<<"\n";
-
-	//TFile *output  = new TFile("/home/sowrol/repo/Results_cascade1_job2.root", "RECREATE");
-
-	// file for post_BDT ana:
-	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_HPO.root"; 							//?????
+						
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
@@ -161,14 +171,14 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	dataloader->AddSignalTree(signal, signal_weight);
     dataloader->AddBackgroundTree(background, background_weight);
 
-    std::cout<<"Signal and bkg tree loaded"<<"\n";
+    //std::cout<<"Signal and bkg tree loaded"<<"\n";
 
     TCut cut1 = ""; // for example: TCut mycuts = "abs(var1)<0.5 && abs(var2-0.5)<1";
 	TCut cut2 = ""; // for example: TCut mycutb = "abs(var1)<0.5";
 
 	dataloader->PrepareTrainingAndTestTree(cut1, cut2, "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V");			//Czy 0 znaczą, że jest na pół?
 	
-	std::cout<<"Training and test tree prepared"<<"\n";
+	//std::cout<<"Training and test tree prepared"<<"\n";
 	//SplitMode - defines how the training and test samples are selected from the source trees (Random/Alternate/Block)
 	//NormMode - NumEvents: renormalisation of the training events such that the sum of event weights of the Signal and Background events, respectively
 	//			  are equal to the number of events Ns,Nb requested in the call Factory::PrepareTrainingAndTestTree
@@ -181,7 +191,7 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	
 	factory->BookMethod(dataloader, TMVA::Types::kBDT, "BDTG", "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=" + NTrees_str + ":MinNodeSize=" + MinNodeSize_str + ":MaxDepth=" + MaxDepth_str + ":BoostType=AdaBoost:AdaBoostBeta=" + AdaBoostBeta_str + ":UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100");
 	
-	std::cout<<"Method booked"<<"\n";
+	//std::cout<<"Method booked"<<"\n";
 	//kBDT - unique enumerator
 	//"BDTG" - user-defined name (can be different)
 	//H
@@ -217,81 +227,80 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	//std::cout<<"File closed"<<"\n";
 	delete factory;
 
-	std::cout << "==> Start TMVAClassificationApplication" << std::endl;
-// ---- Creating reader based on weight file 
-	TMVA::Reader *reader = new TMVA::Reader("!Color:!Silent");
-	//The only options are the booleans:Vfor verbose,Color for coloured output, and Silent to suppress all output
-	TObjArray *branches= inputTree->GetListOfBranches();
-	unsigned long size = (unsigned long) branches->GetEntries();
-	/*TIter myiter(branches);
-	TBranch *myobject;
-	Int_t i = 1;
-	while ((myobject = (TBranch *)myiter.Next())) {				//Just a check if it works
-		std::cout<<i<<std::endl;
-		i++;
-	}
-	std::cout<<size<<std::endl;*/
-	std::vector<Double_t> values_variables(variables.size());
-	std::vector<Double_t> values_spectators(spectators.size());
+// 	std::cout << "==> Starting TMVAClassificationApplication" << std::endl;
+// // ---- Creating reader based on weight file 
+// 	TMVA::Reader *reader = new TMVA::Reader("!Color:!Silent");
+// 	//The only options are the booleans:Vfor verbose,Color for coloured output, and Silent to suppress all output
+// 	TObjArray *branches= inputTree->GetListOfBranches();
+// 	unsigned long size = (unsigned long) branches->GetEntries();
+// 	/*TIter myiter(branches);
+// 	TBranch *myobject;
+// 	Int_t i = 1;
+// 	while ((myobject = (TBranch *)myiter.Next())) {				//Just a check if it works
+// 		std::cout<<i<<std::endl;
+// 		i++;
+// 	}
+// 	std::cout<<size<<std::endl;*/
+// 	std::vector<Double_t> values_variables(variables.size());
+// 	std::vector<Double_t> values_spectators(spectators.size());
 
 
-	for (unsigned i= 0; i < variables.size(); ++i) {
-		TString variableName = variables[i];
-      	inputTree->SetBranchAddress(variableName, &values_variables[i]);		//Pojawiają się błędy i trudno, tak, ma być
-	}
-	for (unsigned i= 0; i < spectators.size(); ++i) {
-		TString variableName = spectators[i];
-		inputTree->SetBranchAddress(variableName, &values_spectators[i]);
-	}
+// 	for (unsigned i= 0; i < variables.size(); ++i) {
+// 		TString variableName = variables[i];
+//       	inputTree->SetBranchAddress(variableName, &values_variables[i]);		//Pojawiają się błędy i trudno, tak, ma być
+// 	}
+// 	for (unsigned i= 0; i < spectators.size(); ++i) {
+// 		TString variableName = spectators[i];
+// 		inputTree->SetBranchAddress(variableName, &values_spectators[i]);
+// 	}
 
-	std::vector<Float_t> values_variables_reader(variables.size());
-	std::vector<Float_t> values_spectators_reader(spectators.size());
+// 	std::vector<Float_t> values_variables_reader(variables.size());
+// 	std::vector<Float_t> values_spectators_reader(spectators.size());
 
-	for (unsigned i = 0; i < variables.size(); ++i) {
-		reader->AddVariable(variables[i], &values_variables_reader[i]);
-		//reader->AddVariable("log("+variables[i]+")", &values_variables_reader[i]);
-	}
-	for (unsigned i = 0; i < spectators.size(); ++i) {
-		reader->AddSpectator(spectators[i], &values_spectators_reader[i]);
-		//reader->AddSpectator("log("+variables[i]+")", &values_spectators_reader[i]);
-	}
+// 	for (unsigned i = 0; i < variables.size(); ++i) {
+// 		reader->AddVariable(variables[i], &values_variables_reader[i]);
+// 		//reader->AddVariable("log("+variables[i]+")", &values_variables_reader[i]);
+// 	}
+// 	for (unsigned i = 0; i < spectators.size(); ++i) {
+// 		reader->AddSpectator(spectators[i], &values_spectators_reader[i]);
+// 		//reader->AddSpectator("log("+variables[i]+")", &values_spectators_reader[i]);
+// 	}
 
-	Double_t BDT_response; 
+// 	Double_t BDT_response; 
 
-	TString dir2    = "/home/sowrol/repo/GridSearch_2021/dataset/weights_HPO/";
-	TString prefix2 = "TMVAClassification";
-	TString methodName2 = "BDTG method";
-	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
+// 	TString dir2    = weights_dir; 
+// 	TString prefix2 = "TMVAClassification";
+// 	TString methodName2 = "BDTG method";
+// 	TString weightfile2 = dir2 + prefix2 + "_BDTG.weights.xml";
 
 
-	reader->BookMVA(methodName2, weightfile2);
+// 	reader->BookMVA(methodName2, weightfile2);
 
-	Int_t nEvent2 = (Int_t) inputTree->GetEntries();				//Tu się steruje tym czy się puszcza po wszystkich wydarzeniach czy po 1000 tylko
-	//Int_t nEvent2 = 1000;
+// 	Int_t nEvent2 = (Int_t) inputTree->GetEntries();				//Tu się steruje tym czy się puszcza po wszystkich wydarzeniach czy po 1000 tylko
+// 	//Int_t nEvent2 = 1000;
 
-	TFile *newfile = new TFile(myfile,"recreate");					//myfile to nazwa pliku - post BDT analysis
-	TTree *newtree = inputTree->CloneTree(0);						//Czy to kopiuje tylko nazwy, bez zawartości?
-	TBranch *myBDTr = newtree->Branch("BDT_response", &BDT_response);
+// 	TFile *newfile = new TFile(myfile,"recreate");					//myfile to nazwa pliku - post BDT analysis
+// 	TTree *newtree = inputTree->CloneTree(0);						
+// 	TBranch *myBDTr = newtree->Branch("BDT_response", &BDT_response);
 
-	for (Long64_t ievt2=0; ievt2<nEvent2; ievt2++) {
-		inputTree->GetEntry(ievt2);
-		if(ievt2 % 10000 == 0) cout << " Processed: " << ievt2 << " entries " <<endl;			//Czyli to wypisywanie jest zadane, nie defaultowe
-		for (unsigned j=0; j<variables.size(); j++) 
-				values_variables_reader[j]=(float)values_variables[j];     
+// 	for (Long64_t ievt2=0; ievt2<nEvent2; ievt2++) {
+// 		inputTree->GetEntry(ievt2);
+// 		if(ievt2 % 10000 == 0) cout << " Processed: " << ievt2 << " entries " <<endl;			//Czyli to wypisywanie jest zadane, nie defaultowe
+// 		for (unsigned j=0; j<variables.size(); j++) 
+// 				values_variables_reader[j]=(float)values_variables[j];     
 
-		for (unsigned j=0; j<spectators.size(); j++)
-				values_spectators_reader[j]=(float)values_spectators[j];
-		BDT_response = reader->EvaluateMVA("BDTG method");
-		newtree->Fill();
+// 		for (unsigned j=0; j<spectators.size(); j++)
+// 				values_spectators_reader[j]=(float)values_spectators[j];
+// 		BDT_response = reader->EvaluateMVA("BDTG method");
+// 		newtree->Fill();
 
-	}	
-	newfile->Write();
-	delete newfile;
-	delete reader;
+// 	}	
+// 	newfile->Write();
+// 	delete newfile;
+// 	delete reader;
 
-	//return AUC;
 
-	//if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName ); //W trybie batch mode nie da się rysować obrazków / możliwe, że w ogóle GUI nie działą
+	//if (!gROOT->IsBatch()) TMVA::TMVAGui( outfileName ); 
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
 

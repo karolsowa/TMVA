@@ -25,24 +25,44 @@ Double_t BDT_classifier_fast(double AdaBoostBeta = 0.6, int MaxDepth = 5, double
 
 // **************** PART 1 - ANALYSE ********************* //
 
+	std::cout<<"Macro starts"<<"\n";
+
+
+	// You should only change the following lines:
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
 	//Input files:
 	
 	TString signal_path = "/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree";
 	TString signal_path2 = "/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree";
 	TString background_path = "/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree";				//Remember to add all signal and bkg paths!!! 
-	//TString background_path2 = "/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree";					//(have a look at line 129)
+	//TString background_path2 = "/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree";					
 	TString inputTree_path = "/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree";
 	//TString inputTree_path2 = "/home/student/Project/B2DK0Pi/B2DK0Pi_2012MC_sig.root/DecayTree"; 
+
+	// ---- Add trees to respective chains:
+	TChain * signal  = new TChain("signal");
+	TChain * background  = new TChain("background");
+	TChain * inputTree  = new TChain("inputTree");
+
+	signal->Add(signal_path); 
+	signal->Add(signal_path2);		
+	background->Add(background_path);		
+	inputTree->Add(inputTree_path); 
+
+	std::cout<<"signal, bkg and input added"<<"\n";	
+
+	// output file with classifier performance results:
+	TString outfileName = "./sample_decay_BDT.root";
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//Weights directory name 
 	(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_BDT";
 	TString weights_dir = "./dataset/weights_BDT/";
-	// output file with NTUPLE:
-	TString outfileName = "./sample_decay_BDT.root";
-	// file for post_BDT ana:
-	TString postBDT_file =  "./sample_decay_postBDT.root"; 	
 
-	std::cout<<"Macro starts"<<"\n";
+
 
 	//Starting a clock to measure execution's time
 	auto start = std::chrono::high_resolution_clock::now();
@@ -120,19 +140,7 @@ Double_t BDT_classifier_fast(double AdaBoostBeta = 0.6, int MaxDepth = 5, double
 		//dataloader->AddSpectator("log("+spectator+")", 'F');
 	}
 
-	std::cout<<"Added variables"<<"\n";
-
-	// ---- Define signal input tree
-	TChain * signal  = new TChain("signal");
-	TChain * background  = new TChain("background");
-	TChain * inputTree  = new TChain("inputTree");
-
-	signal->Add(signal_path); 
-	signal->Add(signal_path2);		
-	background->Add(background_path);		
-	inputTree->Add(inputTree_path); 
-
-	std::cout<<"signal, bkg and input added"<<"\n";					
+	std::cout<<"Added variables"<<"\n";				
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;

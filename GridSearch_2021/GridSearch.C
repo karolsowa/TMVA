@@ -52,7 +52,7 @@ void GridSearch(Double_t AdaBoostBetaValue = 0.01, Int_t MaxDepthStep = 1, Doubl
 	Double_t name_file_d = round(AdaBoostBetaValue*100);
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
-	std::string file_str = "/home/sowrol/repo/outfiles/outfile_" + name_str + ".txt";
+	std::string file_str = "/home/sowrol/repo/try_outfiles/outfile_" + name_str + ".txt";
 	//std::string error_str = "/home/sowrol/repo/outfiles/outfile_" + name_str + "_error.txt";
 	//std::ofstream errorfile(error_str.c_str(), ios_base::app);
 	std::ofstream outfile;
