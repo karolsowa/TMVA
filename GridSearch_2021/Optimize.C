@@ -21,6 +21,26 @@ void Optimize(){
 
 // **************** PART 1 - ANALYSE ********************* //
 
+    //You should only change the following lines: (and line 121)
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+// ---- Add input files
+    TChain * signal  = new TChain("signal");
+    TChain * background  = new TChain("background");
+    TChain * inputTree  = new TChain("inputTree");
+
+    signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
+    signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
+    //background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");            
+    background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");       
+    inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
+
+    // output file with classifier performance results:
+    TString outfileName = "/home/sowrol/repo/TMVA_cascade1_HPO.root";
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	std::cout << std::endl << "==>TMVAClassification: FIRST CLASSIFIER" << std::endl;
 	std::vector<TString> variables = {
 		"B_ENDVERTEX_CHI2",
@@ -71,7 +91,6 @@ void Optimize(){
 
 	};
 	std::vector<TString> spectators = {};
-	TString outfileName = "/home/sowrol/repo/TMVA_cascade1_HPO.root";
 	TFile* outputFile = TFile::Open(outfileName, "RECREATE");
 
 	TMVA::Factory *factory = new TMVA::Factory("TMVAClassification", outputFile,"!V:!Silent:!Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
@@ -85,21 +104,7 @@ void Optimize(){
 		dataloader->AddSpectator(spectator, 'F');
 		//dataloader->AddSpectator("log("+spectator+")", 'F');
 	}
-
-	// ---- Define signal input tree
-	TChain * signal  = new TChain("signal");
-	TChain * background  = new TChain("background");
-	TChain * inputTree  = new TChain("inputTree");
-
-	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
-	signal->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
-	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
-	background->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
-	inputTree->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
-
-
-	// file for post_BDT ana:
-	//TString myfile =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1.root"; 							
+							
 
 	Double_t signal_weight     = 1.0;
 	Double_t background_weight = 1.0;
@@ -120,12 +125,5 @@ void Optimize(){
     TMVA::HyperParameterOptimisationResult HPOResult = HPO->GetResults();
     HPOResult.Print();
     std::cout<<"All done"<<"\n";
-	//dataloader->PrepareTrainingAndTestTree(cut1, cut2, "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V");			
-//   TString methodOptions = "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=2000:MinNodeSize=2.5%:MaxDepth=5:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100";
-//   auto method = factory->BookMethod(dataloader, TMVA::Types::kBDT,"BDTG", methodOptions);
-//	 method->OptimizeTuningParameters();
-	//factory->BookMethod(dataloader, TMVA::Types::kBDT, "BDTG", "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=2000:MinNodeSize=2.5%:MaxDepth=5:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100");
-
-
 
 }

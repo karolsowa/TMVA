@@ -28,13 +28,17 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 	
 	std::cout<<"Macro starts"<<"\n";
 
+	// You should only change the following lines:
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
 	//Redirecting output to files:
 
 	Double_t name_file_d = round(AdaBoostBeta*100);
 	Int_t name_file = int(name_file_d);
 	std::string name_str = std::to_string(name_file);
 	TString name_tstr = TString(name_str);
-	TString screen = "/home/sowrol/repo/outfiles/screen_" + name_tstr +".txt";	
+	TString screen = "/home/sowrol/repo/try_outfiles/screen_" + name_tstr +".txt";	
 	gSystem->RedirectOutput(screen, "a");
 
 	//---- Add trees to respective chains:
@@ -59,9 +63,9 @@ Double_t Cascade1(double AdaBoostBeta = 0.6, int MaxDepth = 5, double MinNodeSiz
 
 
 	// output file with NTUPLE for post_BDT ana:
-	TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_" + name_tstr + ".root"; 	
+	// TString myfile =  "/home/sowrol/repo/MyBDT_cascade1_job2_" + name_tstr + ".root"; 	
 
-						
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------						
 
 	//Weights directory name
 	//(TMVA::gConfig().GetIONames()).fWeightFileDir = "weights_HPO";

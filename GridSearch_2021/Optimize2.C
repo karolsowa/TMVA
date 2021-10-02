@@ -18,7 +18,26 @@
 #include <vector>
 		
 void Optimize2(){
-	std::cout << std::endl << "==>TMVAClassification: SECOND CLASSIFIER" << std::endl;
+
+    //You should only change the following lines: 
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+    // ---- Add input files
+    TChain* signal2  = new TChain("signal2");
+    TChain* background2  = new TChain("background2");
+    TChain* inputTree2  = new TChain("inputTree2");
+
+    signal2->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
+    signal2->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
+    //background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");            
+    background2->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");      
+    inputTree2->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
+
+    // output file with classifier performance results:
+    TString outfileName2 = "/home/sowrol/repo/TMVA_cascade1_OTP.root";
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	std::vector<TString> variables2 = {
 		"B_ENDVERTEX_CHI2",
@@ -70,7 +89,7 @@ void Optimize2(){
 
 	};
 	std::vector<TString> spectators2 = {};
-	TString outfileName2 = "/home/sowrol/repo/TMVA_cascade1_OTP.root";
+
 	TFile* outputFile2 = TFile::Open(outfileName2, "RECREATE");
 
 	TMVA::Factory* factory2 = new TMVA::Factory("TMVAClassification", outputFile2,"!V:!Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification");
@@ -86,18 +105,6 @@ void Optimize2(){
 	 	//dataloader2->AddSpectator("log("+spectator2+")", 'F');
 	}
 
-	TChain* signal2  = new TChain("signal2");
-	TChain* background2  = new TChain("background2");
-	TChain* inputTree2  = new TChain("inputTree2");
-
-	signal2->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0Pi_2012MC_slim.root/DecayTree"); 
-	signal2->Add("/data4/muchaa/Jan2021/NTUPLE/Bd2DK0K_2012MC_slim.root/DecayTree");
-	//background->Add("/home/student/Project/B2DK0Pi/B2D3Pi_2016MC_bkg.root/DecayTree");			//Jako input dać MC signal 2012
-	background2->Add("/data4/muchaa/Jan2021/B2DK0sPi_2016up_slim_B_Dsidebans.root/DecayTree");		//Przetestować dla obydwu
-	inputTree2->Add("/data4/muchaa/Jan2021/NTUPLE/B2DK0sPi_2016up_slim_v4.root/DecayTree"); 
-
-	//TString myfile2 =  "/home/student/Project/B2DK0Pi/ANALIZA/MyBDT_cascade1_and_2.root";
-
 	Double_t signal_weight2     = 1.0;
 	Double_t background_weight2 = 1.0;
 
@@ -107,20 +114,10 @@ void Optimize2(){
     TCut cut3 = ""; // for example: TCut mycuts = "abs(var1)<0.5 && abs(var2-0.5)<1";
 	TCut cut4 = ""; // for example: TCut mycutb = "abs(var1)<0.5";
 
-	// TMVA::HyperParameterOptimisation * HPO2 = new TMVA::HyperParameterOptimisation(dataloader2);
-
-	// HPO2->BookMethod(TMVA::Types::kBDT, "BDTG", "");
-	// HPO2->SetNumFolds(2);
-
-	// std::cout << "Info: calling TMVA::HyperParameterOptimisation::Evaluate" << std::endl;
- //    HPO2->Evaluate();
- //    TMVA::HyperParameterOptimisationResult HPO2Result = HPO2->GetResults();
- //    HPO2Result.Print();
 
 	TString methodOptions2 = "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=2000:MinNodeSize=2.5%:MaxDepth=5:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100";
     auto method2 = factory2->BookMethod(dataloader2, TMVA::Types::kBDT,"BDTG", methodOptions2);
 	method2->OptimizeTuningParameters();
     
-    //dataloader2->PrepareTrainingAndTestTree(cut3, cut4, "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V");
-    //factory2->BookMethod(dataloader2, TMVA::Types::kBDT, "BDTG", "!H:!V:VarTransform=N,G,G_Signal,G_Background:NTrees=2000:MinNodeSize=2.5%:MaxDepth=5:BoostType=AdaBoost:AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=100");
+   
 }
